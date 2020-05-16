@@ -9,6 +9,7 @@ services:
       - './docker/volumes/vipComemrce/dev/testeWilliam/var/lib/mysql:/var/lib/mysql'
     environment:
       - MYSQL_ROOT_PASSWORD=1q2w3e4r
+      - MYSQL_DATABASE=vipdb
   api:
     container_name: api
     build: ./

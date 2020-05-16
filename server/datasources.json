@@ -1,1 +1,12 @@
-{}
+{
+  "db": {
+    "host": "localhost",
+    "port": 3306,
+    "url": "mysql://root:1q2w3e4r@database/vipdb",
+    "database": "vipdb",
+    "password": "1q2w3e4r",
+    "name": "db",
+    "user": "root",
+    "connector": "mysql"
+  }
+}
