@@ -68,6 +68,10 @@ describe('Testes de Integração de Pedidos',function(){
                         {
                             amount:10,
                             productCode:1
+                        },
+                        {
+                            amount:4,
+                            productCode:2
                         }
                     ]
                 })
@@ -82,10 +86,14 @@ describe('Testes de Integração de Pedidos',function(){
             assert(moment(orderDate).isSame(currentDate,'minute'),'A data do pedido deve ser a data atual');
 
             let itens:OrderItem[] = await OrderItemModel.find({where:{orderCode:order.code}});
-            itens.should.be.an('array').with.length(1);
+            itens.should.be.an('array').with.length(2);
             itens[0].should.be.an('object').that.have.property('amount').that.equals(10);
             itens[0].should.be.an('object').that.have.property('orderCode').that.equals(order.code);
             itens[0].should.be.an('object').that.have.property('productCode').that.equals(1);
+
+            itens[1].should.be.an('object').that.have.property('amount').that.equals(4);
+            itens[1].should.be.an('object').that.have.property('orderCode').that.equals(order.code);
+            itens[1].should.be.an('object').that.have.property('productCode').that.equals(2);
             
             let check:Order = await OrderModel.findById(3);
             check.should.be.an('object').that.have.property('code').that.equals(3,'O pedido deve ter sido cadastrado no banco');

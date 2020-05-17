@@ -6,6 +6,16 @@
   "options": {
     "validateUpsert": true
   },
+  "foreignKeys": {
+    "clientCode": {
+      "name": "pedido_cliente",
+      "foreignKey": "clientCode",
+      "entityKey": "code",
+      "entity": "cliente",
+      "onUpdate": "restrict",
+      "onDelete": "cascade"
+    }
+  },
   "properties": {
     "code": {
       "type": "number",
@@ -23,18 +33,16 @@
       "model": "cliente",
       "foreignKey": "clientCode",
       "primaryKey": "code"
+    },
+    "orderItens": {
+      "type": "hasMany",
+      "model": "itemPedido",
+      "foreignKey": "orderCode",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [],
-  "methods": {},
-  "foreignKeys": {
-    "clientCode": {
-      "name": "pedido_cliente",
-      "foreignKey": "clientCode",
-      "entityKey": "code",
-      "entity": "cliente",
-      "onUpdate": "restrict",
-      "onDelete": "cascade"
-    }
-  }
+  "methods": {}
 }
