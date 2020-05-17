@@ -13,17 +13,17 @@ describe('Testes de Cliente',function(){
     })
 
     it('Deve criar um cliente à partir de um JSON',async function(){
-        let client= new Client({
-            codigo:1,
-            nome:'will',
+        let client:Client = new Client({
+            code:1,
+            name:'will',
             email:'will@teste.com',
             cpf:'10994028677',
-            sexo:'M'
+            gender:'M'
         });
-        client.should.have.property('codigo').that.equals(1);
-        client.should.have.property('nome').that.equals('will');
+        client.should.have.property('code').that.equals(1);
+        client.should.have.property('name').that.equals('will');
         client.should.have.property('email').that.equals('will@teste.com');
         client.should.have.property('cpf').that.equals('10994028677');
-        client.should.have.property('sexo').that.equals('M');
+        client.should.have.property('gender').that.equals('M');
     })
 })

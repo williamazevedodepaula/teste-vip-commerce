@@ -2,9 +2,9 @@ import { ClientI } from "./ClientI";
 import { BaseEntity } from "./BaseEntity";
 
 export class Client extends BaseEntity<ClientI> implements ClientI{
-    codigo:number
-    nome:string
+    code:number
+    name:string
     cpf:string
-    sexo?:'M'|'F'
+    gender?:'M'|'F'
     email:string    
 }

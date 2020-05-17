@@ -1,7 +1,7 @@
 export interface ClientI{
-    codigo:number
-    nome:string
+    code:number
+    name:string
     cpf:string
-    sexo?:'M'|'F'
-    email:string
+    gender?:'M'|'F'
+    email:string    
 }
