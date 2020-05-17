@@ -1,6 +1,7 @@
 import { Product } from "../../entity/Product";
 import * as supertest from 'supertest'
 import * as chai from 'chai'
+import { SetupTestDatabase, TestDatabaseResult } from "./test-database-setup";
 const expect = chai.expect;
 const should = chai.should();
 
@@ -11,26 +12,11 @@ describe('Testes de Integração de Produtos',function(){
 
     let firstProduct:Product;
     let secondProduct:Product;
-
-    before('Limpa os dados do banco',async function(){
-        await app.dataSources.db.automigrate();
-    })
-    before('Cria os produtos iniciais no banco',async function(){
-        firstProduct = await ProductModel.create(<Partial<Product>>{
-            name:'Cortina preta nacional',
-            manufacturing:'national',
-            size:'2.8m x 2.3m',
-            price:150.00            
-        });
-        firstProduct.should.have.property('code').that.equals(1);
-
-        secondProduct = await ProductModel.create(<Partial<Product>>{
-            name:'Cortina preta nacional',
-            manufacturing:'imported',
-            size:'2.8m x 2.3m',
-            price:300.00            
-        });
-        secondProduct.should.have.property('code').that.equals(2);
+    
+    before('Configura o banco de dados para testes',async function(){
+        let testDb:TestDatabaseResult = await SetupTestDatabase(app);
+        firstProduct = testDb.products[0];
+        secondProduct = testDb.products[1];
     })
 
     describe('Testes da camada de Moelo/Serviço',async function(){
