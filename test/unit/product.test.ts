@@ -19,12 +19,12 @@ describe('Testes de Produto',function(){
             name:'Cortina Blackout',
             manufacturing:'imported',
             size:'2,8m x 2,3m',
-            value:200.00
+            price:200.00
         });
         product.should.have.property('code').that.equals(1);
         product.should.have.property('name').that.equals('Cortina Blackout');
         product.should.have.property('manufacturing').that.equals('imported');
         product.should.have.property('size').that.equals('2,8m x 2,3m');
-        product.should.have.property('value').that.equals(200);
+        product.should.have.property('price').that.equals(200);
     })
 })

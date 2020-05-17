@@ -5,5 +5,5 @@ export class Product extends BaseEntity<Product>{
     name:string
     manufacturing:'national'|'imported'
     size:string
-    value:number
+    price:number
 }
