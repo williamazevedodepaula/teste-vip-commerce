@@ -1,25 +1,31 @@
 import { Product } from "entity/Product";
 import { Client } from "entity/Client";
 import { LoopBackApplication } from "loopback";
+import { Order } from "entity/Order";
+import * as moment from "moment";
 
 export interface TestDatabaseResult{
     products:Product[],
-    clients:Client[]
+    clients:Client[],
+    orders:Order[]
 }
 
 export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{    
     const ProductModel = app.models.Produto;
     const ClientModel = app.models.Cliente;
+    const OrderModel = app.models.Pedido;
 
     //Recria o banco, realizando drop de todas as tabelas
     await app.dataSources.db.automigrate();
 
     let products:Product[] = await SetupProducts();
-    let clients:Client[] = await SetupClients();
+    let clients:Client[] = await SetupClients();    
+    let orders:Order[] = await SetupOrders();    
 
     return {
         products:products,
-        clients:clients
+        clients:clients,
+        orders:orders
     }
 
     async function SetupProducts():Promise<Product[]>{
@@ -55,6 +61,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
             gender:'M'            
         });
         firstClient.should.have.property('code').that.equals(1);
+
     
         secondClient = await ClientModel.create(<Partial<Client>>{
             name:'Jessica',
@@ -65,5 +72,32 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
         secondClient.should.have.property('code').that.equals(2);
 
         return [firstClient,secondClient];
+    }
+    async function SetupOrders():Promise<Order[]>{
+        let firstOrder:Order = await OrderModel.create(<Order>{
+            clientCode:1,
+            date:moment().subtract(3,'days').toDate()
+        });
+        firstOrder.should.have.property('code').that.equals(1);
+        
+        let secondOrder:Order = await OrderModel.create(<Order>{
+            clientCode:2,
+            date:moment().subtract(2,'days').toDate()
+        });
+        secondOrder.should.have.property('code').that.equals(2);
+
+        let thirdOrder:Order = await OrderModel.create(<Order>{
+            clientCode:1,
+            date:moment().subtract(1,'days').toDate()
+        });
+        thirdOrder.should.have.property('code').that.equals(3);
+
+        let fourthOrder:Order = await OrderModel.create(<Order>{
+            clientCode:2,
+            date:moment().toDate()
+        });
+        fourthOrder.should.have.property('code').that.equals(4);
+
+        return [firstOrder,secondOrder,thirdOrder,fourthOrder]
     }
 }
