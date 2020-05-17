@@ -1,5 +1,6 @@
 import { Product } from "./Product";
 import { Order } from "./Order";
+import { Client } from "./Client";
 
 export class Tax{
 
@@ -12,5 +13,9 @@ export class Tax{
 
     static getOrderTax(order:Partial<Order>):number{
         return order.products?.reduce((total,product)=>total+Tax.getProductTax(product),0)||0;
+    }
+
+    static getTotalTaxInCLientOrders(client:Partial<Client>):number{
+        throw Error("Not yet implemented");
     }
 }
