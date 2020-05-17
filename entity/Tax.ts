@@ -1,4 +1,5 @@
 import { Product } from "./Product";
+import { Order } from "./Order";
 
 export class Tax{
 
@@ -7,5 +8,9 @@ export class Tax{
                       ((product.price > 100) ? 0.1 : 0);
 
         return +((product.price||0) * aliquot).toFixed(2);
+    }
+
+    static getOrderTax(order:Partial<Order>):number{
+        throw Error("Not yet implemented");
     }
 }

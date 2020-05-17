@@ -1,9 +1,10 @@
 import { Product } from "../../entity/Product"
 import { Tax } from "../../entity/Tax"
+import { Order } from "../../entity/Order"
 
 describe('Testes sobre Impostos',async function(){
 
-    it('Produtos nacional com valor maior que R$100,00 devem ter taxa de imposto de 10%',async function(){
+    it('Produtos nacional com valor maior que R$100,00 devem ter taxa de imposto de 10%',function(){
         let product1:Partial<Product> = {
             code:1,
             manufacturing:'national',
@@ -25,7 +26,7 @@ describe('Testes sobre Impostos',async function(){
         taxAmount2.should.equal(10.00,'O imposto aplicado deve ser de 10% (com 2 casas decimais)');        
     })
 
-    it('Produtos nacional com valor inferior ou igual a R$100,00 devem ter isenção de imposto.',async function(){
+    it('Produtos nacional com valor inferior ou igual a R$100,00 devem ter isenção de imposto.',function(){
         let product1:Partial<Product> = {
             code:1,
             manufacturing:'national',
@@ -47,7 +48,7 @@ describe('Testes sobre Impostos',async function(){
         taxAmount2.should.equal(0,'O imposto aplicado deve ser de 0, pois o produto em questão é isento'); 
     })
 
-    it('Produtos importados devem ter imposto de 15%',async function(){
+    it('Produtos importados devem ter imposto de 15%',function(){
         let product1:Partial<Product> = {
             code:1,
             manufacturing:'imported',
@@ -76,5 +77,53 @@ describe('Testes sobre Impostos',async function(){
         taxAmount1.should.equal(15,'O imposto sobre produtos importados é de 15%');
         taxAmount2.should.equal(0.07,'O imposto sobre produtos importados é de 15% (com 2 casas decimais)');
         taxAmount3.should.equal(30,'O imposto sobre produtos importados é de 15%');
+    })
+
+    it('Deve calcular imposto total do pedido',function(){
+        let order:Order = new Order({
+            code:1,
+            clientCode:12,
+            client:<any>{
+                code:12,
+                name:'will',
+                cpf:'10994028679',
+                email:'will@teste.com'
+            },
+            date:new Date(),
+            observation:'teste',
+            payment:'CARD',
+            products:<any>[
+                {
+                    code:1,
+                    name:'Cortina',
+                    manufacturing:'national',
+                    size:'2.3m x 2.8m',
+                    price:200
+                },
+                {
+                    code:2,
+                    name:'Cadeira Escritório',
+                    manufacturing:'imported',
+                    size:'1m x 58xm x 54cm',
+                    price:300
+                },
+                {
+                    code:3,
+                    name:'Jogo de canetas',
+                    manufacturing:'national',
+                    price:15
+                },
+                {
+                    code:4,
+                    name:'Porta lápis',
+                    manufacturing:'imported',
+                    size:'15 cm x 15cm x 15cm',
+                    price:20
+                }
+            ]
+        });
+
+        let taxAmount:number = Tax.getOrderTax(order);
+        taxAmount.should.equal(68,'O imposto do pedido deve ser o somatorio dos impostos sobre os produtos do pedido');
     })
 })
