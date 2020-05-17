@@ -48,6 +48,33 @@ describe('Testes sobre Impostos',async function(){
     })
 
     it('Produtos importados devem ter imposto de 15%',async function(){
-        throw Error("Not yet implemented");
+        let product1:Partial<Product> = {
+            code:1,
+            manufacturing:'imported',
+            name:'Cortina',
+            size:'2.8m x 2.3m',
+            price:100           
+        }
+        let product2:Partial<Product> = {
+            code:2,
+            manufacturing:'imported',
+            name:'adesivo',
+            size:'1cm x 1cm',
+            price:0.50
+        }
+        let product3:Partial<Product> = {
+            code:3,
+            manufacturing:'imported',
+            name:'Cortina grande',
+            size:'4m x 2.3m',
+            price:200           
+        }
+        let taxAmount1:number = Tax.getProductTax(product1);
+        let taxAmount2:number = Tax.getProductTax(product2);
+        let taxAmount3:number = Tax.getProductTax(product3);
+
+        taxAmount1.should.equal(15,'O imposto sobre produtos importados é de 15%');
+        taxAmount2.should.equal(0.075,'O imposto sobre produtos importados é de 15%');
+        taxAmount3.should.equal(30,'O imposto sobre produtos importados é de 15%');
     })
 })
