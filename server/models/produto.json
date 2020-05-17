@@ -1,0 +1,36 @@
+{
+  "name": "produto",
+  "plural": "produtos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "id": true,
+      "generated": true,
+      "type": "number"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "manufacturing": {
+      "type": "string",
+      "required": true
+    },
+    "size": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
