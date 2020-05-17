@@ -12,9 +12,11 @@ describe('Testes sobre Impostos',async function(){
             price:200           
         }
         let taxAmount:number = Tax.getProductTax(product);
-        taxAmount.should.equal(220,'O imposto aplicado deve ser de 10%');
+        taxAmount.should.equal(20,'O imposto aplicado deve ser de 10%');
 
         product.price = 101.1;
+        taxAmount = Tax.getProductTax(product);
+        
         taxAmount.should.equal(10.11,'O imposto aplicado deve ser de 10%');
     })
 
