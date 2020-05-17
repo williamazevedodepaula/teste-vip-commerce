@@ -47,10 +47,29 @@
   },
   "pedido": {
     "dataSource": "db",
-    "public": true
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "find": true,
+          "findById": true,
+          "replaceById": true,
+          "create": true,
+          "deleteById": true
+        }
+      }
+    }
   },
   "itemPedido": {
     "dataSource": "db",
-    "public": false
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false
+        }
+      }
+    }
   }
 }

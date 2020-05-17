@@ -39,7 +39,7 @@
       "model": "itemPedido",
       "foreignKey": "orderCode",
       "options": {
-        "nestRemoting": true
+        "nestRemoting": false
       }
     }
   },
