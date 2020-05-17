@@ -97,7 +97,7 @@ describe('Testes sobre Impostos',async function(){
                 {
                     amount:1,
                     product:{
-                        code:1,
+                        code:2,
                         name:'Cortina',
                         manufacturing:'national',
                         size:'2.3m x 2.8m',
@@ -105,7 +105,7 @@ describe('Testes sobre Impostos',async function(){
                     }
                 },
                 {
-                    amount:1,
+                    amount:3,
                     product:{
                         code:2,
                         name:'Cadeira Escritório',
@@ -115,7 +115,7 @@ describe('Testes sobre Impostos',async function(){
                     }
                 },
                 {
-                    amount:1,
+                    amount:2,
                     product:{
                         code:3,
                         name:'Jogo de canetas',
@@ -137,7 +137,7 @@ describe('Testes sobre Impostos',async function(){
         });
 
         let taxAmount:number = Tax.getOrderTax(order);
-        taxAmount.should.equal(68,'O imposto do pedido deve ser o somatorio dos impostos sobre os produtos do pedido');
+        taxAmount.should.equal(178,'O imposto do pedido deve ser o somatorio dos impostos sobre os produtos do pedido');
     })
 
 
@@ -146,7 +146,7 @@ describe('Testes sobre Impostos',async function(){
             code:1,
             itens:<any>[
                 {
-                    amount:1,
+                    amount:2,
                     product:{
                         code:1,
                         name:'Cortina',
@@ -171,7 +171,7 @@ describe('Testes sobre Impostos',async function(){
             code:2,
             itens:<any>[                
                 {
-                    amount:1,
+                    amount:2,
                     product:{
                         code:3,
                         name:'Jogo de canetas',
@@ -180,7 +180,7 @@ describe('Testes sobre Impostos',async function(){
                     }
                 },
                 {
-                    amount:1,
+                    amount:2,
                     product:{
                         code:4,
                         name:'Porta lápis',
@@ -214,6 +214,6 @@ describe('Testes sobre Impostos',async function(){
         });
 
         let totalTax:number = Tax.getClientTax(client);
-        totalTax.should.equal(71,'O imposto total pago pelo cliente deve ser igual ao somatorio dos impostos em seus pedidos');
+        totalTax.should.equal(94,'O imposto total pago pelo cliente deve ser igual ao somatorio dos impostos em seus pedidos');
     });
 })
