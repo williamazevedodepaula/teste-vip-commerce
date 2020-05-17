@@ -11,6 +11,6 @@ export class Tax{
     }
 
     static getOrderTax(order:Partial<Order>):number{
-        throw Error("Not yet implemented");
+        return order.products?.reduce((total,product)=>total+Tax.getProductTax(product),0)||0;
     }
 }
