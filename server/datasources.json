@@ -8,5 +8,9 @@
     "name": "db",
     "user": "root",
     "connector": "mysql"
+  },
+  "db2":{
+      "host":"localhost",
+      "connector":"memory"
   }
 }

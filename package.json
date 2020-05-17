@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint .",
     "start": "npx nodemon --delay 80ms -e json,js,ts --ignore 'ts-node-*/*.js' --signal SIGHUP --exec node -r ts-node/register --inspect=0.0.0.0:4000 server/server.js",
-    "test": "npm run unit-test && npm run integration-test",
+    "test": "npx mocha -r ts-node/register -t 10000 --recursive 'test/**/**.test.ts' ",
     "unit-test": "npx mocha -r ts-node/register -t 10000 --recursive 'test/unit/**.test.ts' ",
     "integration-test": "npx mocha -r ts-node/register -t 10000 --recursive 'test/integration/**.test.ts' ",
     "posttest": "npm run lint"

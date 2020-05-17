@@ -1,8 +1,7 @@
-export class BaseEntity<T>{
-    constructor(data?:T){
-        if(!data) return undefined;
-        Object.keys(data).forEach((key)=>{
-            this[key]=data[key];
-        })
+import { PersistedModel } from "loopback";
+
+export class BaseEntity<T> extends PersistedModel{
+    constructor(data?:Partial<T>){
+        super(data);
     }
 }

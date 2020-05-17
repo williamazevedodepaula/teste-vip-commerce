@@ -1,7 +1,6 @@
-import { ClientI } from "./ClientI";
 import { BaseEntity } from "./BaseEntity";
 
-export class Client extends BaseEntity<ClientI> implements ClientI{
+export class Client extends BaseEntity<Client>{
     code:number
     name:string
     cpf:string

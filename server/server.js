@@ -9,9 +9,9 @@ const loopback = require('loopback');
 const boot = require('loopback-boot');
 
 const app = module.exports = loopback();
-console.log(`Env: ${process.env.NODE_ENV}`)
+
 app.start = function() {
-  // start the web server  
+  // start the web server
   return app.listen(function() {
     app.emit('started');
     const baseUrl = app.get('url').replace(/\/$/, '');
