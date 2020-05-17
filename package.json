@@ -14,9 +14,9 @@
     "posttest": "npm run lint"
   },
   "dependencies": {
+    "@types/chai": "^4.2.11",
     "@types/loopback": "^3.2.9",
     "@types/mocha": "^7.0.2",
-    "@types/chai": "^4.2.11",
     "chai": "^4.2.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
@@ -31,10 +31,11 @@
     "ts-node": "^8.10.1",
     "typescript": "^3.9.2"
   },
-  "devDependencies": {    
+  "devDependencies": {
     "eslint": "^7.0.0",
     "eslint-config-loopback": "^8.0.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
   },
   "repository": {
     "type": "github",
