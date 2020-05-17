@@ -8,9 +8,9 @@
   },
   "properties": {
     "code": {
+      "type": "number",
       "id": true,
-      "generated": true,
-      "type": "number"      
+      "generated": true
     },
     "name": {
       "type": "string",

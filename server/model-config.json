@@ -44,5 +44,9 @@
         }
       }
     }
+  },
+  "pedido": {
+    "dataSource": "db",
+    "public": true
   }
 }

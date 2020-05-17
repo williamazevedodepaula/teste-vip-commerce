@@ -3,6 +3,8 @@ import { Client } from "entity/Client";
 import { LoopBackApplication } from "loopback";
 import { Order } from "entity/Order";
 import * as moment from "moment";
+import * as chai from 'chai';
+const should = chai.should();
 
 export interface TestDatabaseResult{
     products:Product[],

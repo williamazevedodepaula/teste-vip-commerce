@@ -1,0 +1,30 @@
+{
+  "name": "pedido",
+  "plural": "pedidos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "id":true,
+      "generated":true,
+      "type": "number"      
+    },
+    "date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "cliente": {
+      "type": "belongsTo",
+      "model": "cliente",
+      "primaryKey":"code",
+      "foreignKey": "clientCode"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
