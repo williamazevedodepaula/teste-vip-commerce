@@ -12,10 +12,15 @@ export class Tax{
     }
 
     static getOrderTax(order:Partial<Order>):number{
-        return order.itens?.reduce((total,item)=>total+Tax.getProductTax(item.product),0)||0;
+        return order.itens?.reduce(
+            (total,item)=>total+(
+                (item.amount||0) * Tax.getProductTax(item.product))
+            ,0)||0;
     }
 
     static getClientTax(client:Partial<Client>):number{
-        return client.orders?.reduce((total,order)=>total+Tax.getOrderTax(order),0)||0;
-    }
+        return client.orders?.reduce(
+            (total,order)=>total+Tax.getOrderTax(order)
+        ,0)||0;
+    }    
 }

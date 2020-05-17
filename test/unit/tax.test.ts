@@ -95,9 +95,9 @@ describe('Testes sobre Impostos',async function(){
             payment:'CARD',
             itens:<any>[
                 {
-                    amount:1,
+                    amount:2,
                     product:{
-                        code:2,
+                        code:1,
                         name:'Cortina',
                         manufacturing:'national',
                         size:'2.3m x 2.8m',
