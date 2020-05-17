@@ -9,6 +9,7 @@ const assert = chai.assert;
 const app = require('../../server/server');
 const ProductModel = app.models.Produto;
 const OrderModel = app.models.Pedido;
+const OrderItemModel = app.models.ItemPedido;
 
 describe('Testes de Integração de Produtos',function(){
 
@@ -87,7 +88,7 @@ describe('Testes de Integração de Produtos',function(){
         })
 
         it('Deve realizar EXCLUSÃO de um produto pela API caso NÃO haja pedido para o mesmo',async function(){
-            await OrderModel.destroyAll({productCode:firstProduct.code});
+            await OrderItemModel.destroyAll({productCode:firstProduct.code});
 
             await supertest(app)
                 .delete(`/api/produtos/${firstProduct.code}`)
