@@ -4,6 +4,7 @@ import * as chai from 'chai'
 import { SetupTestDatabase, TestDatabaseResult } from "./test-database-setup";
 const expect = chai.expect;
 const should = chai.should();
+const assert = chai.assert;
 
 const app = require('../../server/server');
 const ProductModel = app.models.Produto;
@@ -77,15 +78,15 @@ describe('Testes de Integração de Produtos',function(){
             let check:Product = await ProductModel.findById(firstProduct.code);
             check.should.be.an('object').that.have.property('price').that.equals(200,'O preço do produto deve ter sido alterado no banco');            
         })
-/*
+
         it('Deve realizar EXCLUSÃO de um produto pela API',async function(){
-            let result = await supertest(app)
+            await supertest(app)
                 .delete(`/api/produtos/${firstProduct.code}`)
                 .expect(200);
             
             let check:Product = await ProductModel.findById(firstProduct.code);
-            expect(check).to.be(undefined);
-        })*/
+            assert(!check,'O produto não deve mais existir no banco de dados');
+        })
     })
 
 
