@@ -93,33 +93,45 @@ describe('Testes sobre Impostos',async function(){
             date:new Date(),
             observation:'teste',
             payment:'CARD',
-            products:<any>[
+            itens:<any>[
                 {
-                    code:1,
-                    name:'Cortina',
-                    manufacturing:'national',
-                    size:'2.3m x 2.8m',
-                    price:200
+                    amount:1,
+                    product:{
+                        code:1,
+                        name:'Cortina',
+                        manufacturing:'national',
+                        size:'2.3m x 2.8m',
+                        price:200
+                    }
                 },
                 {
-                    code:2,
-                    name:'Cadeira Escritório',
-                    manufacturing:'imported',
-                    size:'1m x 58xm x 54cm',
-                    price:300
+                    amount:1,
+                    product:{
+                        code:2,
+                        name:'Cadeira Escritório',
+                        manufacturing:'imported',
+                        size:'1m x 58xm x 54cm',
+                        price:300
+                    }
                 },
                 {
-                    code:3,
-                    name:'Jogo de canetas',
-                    manufacturing:'national',
-                    price:15
+                    amount:1,
+                    product:{
+                        code:3,
+                        name:'Jogo de canetas',
+                        manufacturing:'national',
+                        price:15
+                    }
                 },
                 {
-                    code:4,
-                    name:'Porta lápis',
-                    manufacturing:'imported',
-                    size:'15 cm x 15cm x 15cm',
-                    price:20
+                    amount:1,
+                    product:{
+                        code:4,
+                        name:'Porta lápis',
+                        manufacturing:'imported',
+                        size:'15 cm x 15cm x 15cm',
+                        price:20
+                    }
                 }
             ]
         });
@@ -132,49 +144,64 @@ describe('Testes sobre Impostos',async function(){
     it('Deve calcular imposto total dos pedidos de um cliente',function(){
         let order1:Order = new Order({
             code:1,
-            products:<any>[
+            itens:<any>[
                 {
-                    code:1,
-                    name:'Cortina',
-                    manufacturing:'national',
-                    size:'2.3m x 2.8m',
-                    price:200
+                    amount:1,
+                    product:{
+                        code:1,
+                        name:'Cortina',
+                        manufacturing:'national',
+                        size:'2.3m x 2.8m',
+                        price:200
+                    }
                 },
                 {
-                    code:2,
-                    name:'Cadeira Escritório',
-                    manufacturing:'imported',
-                    size:'1m x 58xm x 54cm',
-                    price:300
+                    amount:1,
+                    product:{
+                        code:2,
+                        name:'Cadeira Escritório',
+                        manufacturing:'imported',
+                        size:'1m x 58xm x 54cm',
+                        price:300
+                    }
                 }
             ]
         });
         let order2:Order = new Order({
             code:2,
-            products:<any>[                
+            itens:<any>[                
                 {
-                    code:3,
-                    name:'Jogo de canetas',
-                    manufacturing:'national',
-                    price:15
+                    amount:1,
+                    product:{
+                        code:3,
+                        name:'Jogo de canetas',
+                        manufacturing:'national',
+                        price:15
+                    }
                 },
                 {
-                    code:4,
-                    name:'Porta lápis',
-                    manufacturing:'imported',
-                    size:'15 cm x 15cm x 15cm',
-                    price:20
+                    amount:1,
+                    product:{
+                        code:4,
+                        name:'Porta lápis',
+                        manufacturing:'imported',
+                        size:'15 cm x 15cm x 15cm',
+                        price:20
+                    }
                 }
             ]
         });
         let order3:Order = new Order({
             code:2,
-            products:<any>[                
+            itens:<any>[                
                 {
-                    code:3,
-                    name:'Jogo de canetas importado',
-                    manufacturing:'imported',
-                    price:20
+                    amount:1,
+                    product:{
+                        code:3,
+                        name:'Jogo de canetas importado',
+                        manufacturing:'imported',
+                        price:20
+                    }
                 }
             ]
         });

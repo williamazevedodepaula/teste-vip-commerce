@@ -1,6 +1,7 @@
 import { BaseEntity } from "./BaseEntity";
 import { Client } from "./Client";
 import { Product } from "./Product";
+import { OrderItem } from "./OrderItem";
 
 export class Order extends BaseEntity<Order>{
     code:number
@@ -11,5 +12,5 @@ export class Order extends BaseEntity<Order>{
     client?:Client
     clientCode:number
 
-    products?:Product[]
+    itens?:OrderItem[]
 }

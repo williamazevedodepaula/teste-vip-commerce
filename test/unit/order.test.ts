@@ -28,18 +28,26 @@ describe('Testes de Pedido',function(){
             date:date,
             observation:'teste',
             payment:'CARD',
-            products:<any>[
+            itens:<any>[
                 {
-                    code:1,
-                    name:'Cortina',
-                    manufacturing:'national',
-                    size:'2.3m x 2.8m'
+                    amount:1,
+                    productCode:1,
+                    product:{
+                        code:1,
+                        name:'Cortina',
+                        manufacturing:"national",
+                        size:'2.3m x 2.8m'
+                    }
                 },
                 {
-                    code:2,
-                    name:'Cadeira Escritório',
-                    manufacturing:'imported',
-                    size:'1m x 58xm x 54cm'
+                    amount:3,
+                    productCode:2,
+                    product: {
+                        code:2,
+                        name:'Cadeira Escritório',
+                        manufacturing:"imported",
+                        size:'1m x 58xm x 54cm'
+                    }
                 }
             ]
         });
@@ -50,8 +58,13 @@ describe('Testes de Pedido',function(){
         order.should.have.property('date').that.equals(date);
         order.should.have.property('observation').that.equals('teste');
         order.should.have.property('payment').that.equals('CARD');
-        order.should.have.property('products').that.is.an('array').with.length(2);
-        order.products[0].should.have.property('code').that.equal(1);
-        order.products[1].should.have.property('code').that.equal(2);
+        order.should.have.property('itens').that.is.an('array').with.length(2);
+        order.itens[0].should.have.property('product').that.is.an('object').that.have.property('code').that.equals(1);
+        order.itens[0].should.have.property('productCode').that.equals(1);
+        order.itens[0].should.have.property('amount').that.equals(1);
+
+        order.itens[1].should.have.property('product').that.is.an('object').that.have.property('code').that.equals(2);
+        order.itens[1].should.have.property('productCode').that.equals(2);
+        order.itens[1].should.have.property('amount').that.equals(3);
     })
 })
