@@ -186,7 +186,7 @@ describe('Testes sobre Impostos',async function(){
             orders:[order1,order2,order3]
         });
 
-        let totalTax:number = Tax.getTotalTaxInCLientOrders(client);
+        let totalTax:number = Tax.getClientTax(client);
         totalTax.should.equal(71,'O imposto total pago pelo cliente deve ser igual ao somatorio dos impostos em seus pedidos');
     });
 })
