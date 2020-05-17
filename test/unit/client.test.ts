@@ -7,12 +7,12 @@ const expect = chai.expect;
 
 describe('Testes de Cliente',function(){
 
-    it('Should create a client',async function(){
-        let client= new Client(undefined);
+    it('Deve criar um cliente',async function(){
+        let client:Client = new Client(undefined);
         expect(client).to.exist;
     })
 
-    it('Should create a client from JSON data',async function(){
+    it('Deve criar um cliente à partir de um JSON',async function(){
         let client= new Client({
             codigo:1,
             nome:'will',
