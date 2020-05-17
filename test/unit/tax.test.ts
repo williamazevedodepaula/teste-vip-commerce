@@ -21,8 +21,8 @@ describe('Testes sobre Impostos',async function(){
         let taxAmount1:number = Tax.getProductTax(product1);
         let taxAmount2:number = Tax.getProductTax(product2);
 
-        taxAmount1.should.equal(20,'O imposto aplicado deve ser de 10%');
-        taxAmount2.should.equal(10.001,'O imposto aplicado deve ser de 10%');        
+        taxAmount1.should.equal(20.00,'O imposto aplicado deve ser de 10%');
+        taxAmount2.should.equal(10.00,'O imposto aplicado deve ser de 10% (com 2 casas decimais)');        
     })
 
     it('Produtos nacional com valor inferior ou igual a R$100,00 devem ter isenção de imposto.',async function(){
@@ -38,7 +38,7 @@ describe('Testes sobre Impostos',async function(){
             manufacturing:'national',
             name:'adesivo',
             size:'1cm x 1cm',
-            price:0.01
+            price:0.5
         }
         let taxAmount1:number = Tax.getProductTax(product1);
         let taxAmount2:number = Tax.getProductTax(product2);
@@ -74,7 +74,7 @@ describe('Testes sobre Impostos',async function(){
         let taxAmount3:number = Tax.getProductTax(product3);
 
         taxAmount1.should.equal(15,'O imposto sobre produtos importados é de 15%');
-        taxAmount2.should.equal(0.075,'O imposto sobre produtos importados é de 15%');
+        taxAmount2.should.equal(0.07,'O imposto sobre produtos importados é de 15% (com 2 casas decimais)');
         taxAmount3.should.equal(30,'O imposto sobre produtos importados é de 15%');
     })
 })
