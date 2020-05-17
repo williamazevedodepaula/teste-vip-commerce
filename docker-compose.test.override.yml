@@ -1,0 +1,11 @@
+version: '3'
+services:
+  database:    
+    volumes:
+      - './docker/volumes/vipComemrce/test/testeWilliam/var/lib/mysql:/var/lib/mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD=1q2w3e4r
+      - MYSQL_DATABASE=vipdb
+  api:
+    environment:
+      - NODE_ENV=test

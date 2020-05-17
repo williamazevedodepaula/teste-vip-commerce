@@ -8,9 +8,16 @@
   "scripts": {
     "lint": "eslint .",
     "start": "npx nodemon --delay 80ms -e json,js,ts --ignore 'ts-node-*/*.js' --signal SIGHUP --exec node -r ts-node/register --inspect=0.0.0.0:4000 server/server.js",
+    "test": "npm run unit-test && npm run integration-test",
+    "unit-test": "npx mocha -r ts-node/register -t 10000 --recursive 'test/unit/**.test.ts' ",
+    "integration-test": "npx mocha -r ts-node/register -t 10000 --recursive 'test/integration/**.test.ts' ",
     "posttest": "npm run lint"
   },
   "dependencies": {
+    "@types/loopback": "^3.2.9",
+    "@types/mocha": "^7.0.2",
+    "@types/chai": "^4.2.11",
+    "chai": "^4.2.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "helmet": "^3.10.0",
@@ -18,12 +25,13 @@
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^6.2.0",
     "loopback-connector-mysql": "^5.4.3",
+    "mocha": "^7.1.2",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^3.0.0",
     "ts-node": "^8.10.1",
     "typescript": "^3.9.2"
   },
-  "devDependencies": {
+  "devDependencies": {    
     "eslint": "^7.0.0",
     "eslint-config-loopback": "^8.0.0",
     "nodemon": "^2.0.4"
