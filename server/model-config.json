@@ -48,5 +48,9 @@
   "pedido": {
     "dataSource": "db",
     "public": true
+  },
+  "itemPedido": {
+    "dataSource": "db",
+    "public": false
   }
 }

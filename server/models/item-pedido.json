@@ -1,0 +1,57 @@
+{
+  "name": "itemPedido",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {        
+    "code": {
+      "type": "number",
+      "id":true,
+      "generated": true
+    },
+    "orderCode": {
+      "type": "number",
+      "required":true
+    },
+    "amount": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "order": {
+      "type": "belongsTo",
+      "model": "pedido",
+      "foreignKey": "orderCode"
+    },
+    "product": {
+      "type": "belongsTo",
+      "model": "produto",
+      "primaryKey":"code",
+      "foreignKey": "productCode"
+    }    
+  },
+  "acls": [],
+  "methods": {},
+  "foreignKeys": {
+    "productCode": {
+      "name": "itempedido_product",
+      "foreignKey": "productCode",
+      "entityKey": "code",
+      "entity": "produto",
+      "onUpdate": "restrict",
+      "onDelete": "restrict"
+    },
+    "orderCode": {
+      "name": "itempedido_pedido",
+      "foreignKey": "orderCode",
+      "entityKey": "code",
+      "entity": "pedido",
+      "onUpdate": "restrict",
+      "onDelete": "cascade"
+    }
+  }
+}

@@ -8,9 +8,9 @@
   },
   "properties": {
     "code": {
-      "id":true,
-      "generated":true,
-      "type": "number"      
+      "type": "number",
+      "id": true,
+      "generated": true
     },
     "date": {
       "type": "date"
@@ -21,10 +21,20 @@
     "cliente": {
       "type": "belongsTo",
       "model": "cliente",
-      "primaryKey":"code",
-      "foreignKey": "clientCode"
+      "foreignKey": "clientCode",
+      "primaryKey": "code"
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "foreignKeys": {
+    "clientCode": {
+      "name": "pedido_cliente",
+      "foreignKey": "clientCode",
+      "entityKey": "code",
+      "entity": "cliente",
+      "onUpdate": "restrict",
+      "onDelete": "cascade"
+    }
+  }
 }

@@ -10,8 +10,9 @@ const boot = require('loopback-boot');
 
 const app = module.exports = loopback();
 
-app.start = function() {
+app.start = async function() {
   // start the web server
+  await app.dataSources.db.autoupdate();
   return app.listen(function() {
     app.emit('started');
     const baseUrl = app.get('url').replace(/\/$/, '');

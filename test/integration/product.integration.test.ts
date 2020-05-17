@@ -8,6 +8,7 @@ const assert = chai.assert;
 
 const app = require('../../server/server');
 const ProductModel = app.models.Produto;
+const OrderModel = app.models.Pedido;
 
 describe('Testes de Integração de Produtos',function(){
 
@@ -79,7 +80,15 @@ describe('Testes de Integração de Produtos',function(){
             check.should.be.an('object').that.have.property('price').that.equals(200,'O preço do produto deve ter sido alterado no banco');            
         })
 
-        it('Deve realizar EXCLUSÃO de um produto pela API',async function(){
+        it('Não deve realizar EXCLUSÃO de um produto pela API caso haja pedido para o mesmo',async function(){
+            let result = await supertest(app)
+                .delete(`/api/produtos/${firstProduct.code}`)
+                .expect(500);
+        })
+
+        it('Deve realizar EXCLUSÃO de um produto pela API caso NÃO haja pedido para o mesmo',async function(){
+            await OrderModel.destroyAll({productCode:firstProduct.code});
+
             await supertest(app)
                 .delete(`/api/produtos/${firstProduct.code}`)
                 .expect(200);
