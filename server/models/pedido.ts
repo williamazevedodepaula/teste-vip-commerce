@@ -12,4 +12,12 @@ module.exports = function(Pedido) {
             await app.models.ItemPedido.create(item)
         }
     })
+
+    Pedido.afterRemote('replaceById',async function(ctx,instance:Order){        
+        for(var item of (instance.itens||[])){
+            item.orderCode = instance.code;
+            await app.models.ItemPedido.destroyAll({orderCode:instance.code});
+            await app.models.ItemPedido.create(item);
+        }
+    })
 };

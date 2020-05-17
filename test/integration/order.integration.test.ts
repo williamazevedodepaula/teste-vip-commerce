@@ -103,7 +103,14 @@ describe('Testes de Integração de Pedidos',function(){
             let newDateMoment = moment().add(2,'days');
             let result = await supertest(app)
                 .put(`/api/pedidos/${firstOrder.code}`)
-                .send(<Partial<Order>>{...firstOrder,date:newDateMoment.toDate(),code:undefined})
+                .send(<Partial<Order>>{
+                    ...firstOrder,
+                    date:newDateMoment.toDate(),
+                    code:undefined,
+                    itens:[
+                        {productCode:1,amount:4}
+                    ]
+                })
                 .expect(200);
             
             let check:Order = await OrderModel.findById(firstOrder.code);
@@ -112,6 +119,12 @@ describe('Testes de Integração de Pedidos',function(){
             let checkDateStr = moment(check.date).format('DD/MM/YYYY');
             let currentDate = newDateMoment.format('DD/MM/YYYY');
             assert(checkDateStr == currentDate,'A data do pedido deve ter sido alterada no banco');
+
+            let itens:OrderItem[] = await OrderItemModel.find({where:{orderCode:firstOrder.code}});
+            itens.should.be.an('array').with.length(1,'Os itens anteriores do pedido devem ter sido substituidos pelo novo');
+            itens[0].should.be.an('object').that.have.property('amount').that.equals(4);
+            itens[0].should.be.an('object').that.have.property('orderCode').that.equals(firstOrder.code);
+            itens[0].should.be.an('object').that.have.property('productCode').that.equals(1);
         })
 
         it('Deve realizar EXCLUSÃO de um pedido pela API',async function(){
@@ -121,6 +134,9 @@ describe('Testes de Integração de Pedidos',function(){
             
             let check:Order = await OrderModel.findById(firstOrder.code);
             assert(!check,'O pedido não deve mais existir no banco de dados');
+
+            let itens:OrderItem[] = await OrderItemModel.find({where:{orderCode:firstOrder.code}});
+            itens.should.be.an('array').with.length(0,'Os itens do pedido devem ter sido excluidos tambem');
         })
     })
 
