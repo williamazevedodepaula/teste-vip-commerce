@@ -4,12 +4,14 @@ import * as chai from 'chai';
 import * as moment from 'moment';
 import { SetupTestDatabase, TestDatabaseResult } from "./test-database-setup";
 import {  Order } from "entity/Order";
+import { OrderItem } from "entity/OrderItem";
 const expect = chai.expect;
 const should = chai.should();
 const assert = chai.assert;
 
 const app = require('../../server/server');
 const OrderModel = app.models.Pedido;
+const OrderItemModel = app.models.ItemPedido;
 
 describe('Testes de Integração de Pedidos',function(){
 
@@ -61,7 +63,13 @@ describe('Testes de Integração de Pedidos',function(){
             let result = await supertest(app)
                 .post(`/api/pedidos`)
                 .send(<Partial<Order>>{
-                    clientCode:1
+                    clientCode:1,
+                    itens:[
+                        {
+                            amount:10,
+                            productCode:1
+                        }
+                    ]
                 })
                 .expect(200);
 
@@ -72,6 +80,12 @@ describe('Testes de Integração de Pedidos',function(){
             let orderDate = order.date;
             let currentDate = new Date();
             assert(moment(orderDate).isSame(currentDate,'minute'),'A data do pedido deve ser a data atual');
+
+            let itens:OrderItem[] = await OrderItemModel.find({where:{orderCode:order.code}});
+            itens.should.be.an('array').with.length(1);
+            itens[0].should.be.an('object').that.have.property('amount').that.equals(10);
+            itens[0].should.be.an('object').that.have.property('orderCode').that.equals(order.code);
+            itens[0].should.be.an('object').that.have.property('productCode').that.equals(1);
             
             let check:Order = await OrderModel.findById(3);
             check.should.be.an('object').that.have.property('code').that.equals(3,'O pedido deve ter sido cadastrado no banco');
