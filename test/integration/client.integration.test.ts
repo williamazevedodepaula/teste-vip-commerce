@@ -81,12 +81,12 @@ describe('Testes de Integração de Clientes',function(){
                 .expect(200);
             
             let check:Client = await ClientModel.findById(firstClient.code);
-            check.should.be.an('object').that.have.property('price').that.equals('william.changed@teste.com','O email do cliente deve ter sido alterado no banco');            
+            check.should.be.an('object').that.have.property('email').that.equals('william.changed@teste.com','O email do cliente deve ter sido alterado no banco');            
         })
 
         it('Deve realizar EXCLUSÃO de um cliente pela API',async function(){
             await supertest(app)
-                .delete(`/api/produtos/${firstClient.code}`)
+                .delete(`/api/clientes/${firstClient.code}`)
                 .expect(200);
             
             let check:Client = await ClientModel.findById(firstClient.code);

@@ -19,7 +19,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
 
     return {
         products:products,
-        clients:[]
+        clients:clients
     }
 
     async function SetupProducts():Promise<Product[]>{

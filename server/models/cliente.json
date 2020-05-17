@@ -1,6 +1,6 @@
 {
-  "name": "produto",
-  "plural": "produtos",
+  "name": "cliente",
+  "plural": "clientes",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
@@ -8,7 +8,7 @@
   },
   "properties": {
     "code": {
-      "id": true,
+      "id":true,
       "generated": true,
       "type": "number"      
     },
@@ -16,17 +16,16 @@
       "type": "string",
       "required": true
     },
-    "manufacturing": {
+    "cpf": {
       "type": "string",
       "required": true
     },
-    "size": {
+    "gender": {
       "type": "string"
     },
-    "price": {
-      "type": "number",
-      "required": true,
-      "default": 0
+    "email": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
