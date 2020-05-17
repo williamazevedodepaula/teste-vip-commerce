@@ -26,7 +26,25 @@ describe('Testes sobre Impostos',async function(){
     })
 
     it('Produtos nacional com valor inferior ou igual a R$100,00 devem ter isenção de imposto.',async function(){
-        throw Error("Not yet implemented");
+        let product1:Partial<Product> = {
+            code:1,
+            manufacturing:'national',
+            name:'Cortina',
+            size:'2.8m x 2.3m',
+            price:100           
+        }
+        let product2:Partial<Product> = {
+            code:2,
+            manufacturing:'national',
+            name:'adesivo',
+            size:'1cm x 1cm',
+            price:0.01
+        }
+        let taxAmount1:number = Tax.getProductTax(product1);
+        let taxAmount2:number = Tax.getProductTax(product2);
+
+        taxAmount1.should.equal(0,'O imposto aplicado deve ser de 0, pois o produto em questão é isento');
+        taxAmount2.should.equal(0,'O imposto aplicado deve ser de 0, pois o produto em questão é isento'); 
     })
 
     it('Produtos importados devem ter imposto de 15%',async function(){
