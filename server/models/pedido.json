@@ -44,5 +44,8 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "include":["itens","cliente"]
+  }
 }

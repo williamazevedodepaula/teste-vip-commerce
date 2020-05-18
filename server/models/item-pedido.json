@@ -53,5 +53,8 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {},
+  "scope": {
+    "include":["product"]
+  }
 }
