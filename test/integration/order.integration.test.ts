@@ -154,6 +154,14 @@ describe('Testes de Integração de Pedidos',function(){
             let itens:OrderItem[] = await OrderItemModel.find({where:{orderCode:firstOrder.code}});
             itens.should.be.an('array').with.length(0,'Os itens do pedido devem ter sido excluidos tambem');
         })
+
+        it('Deve enviar um pedido por EMAIL através da API',async function(){
+            let result = await supertest(app)
+                .post(`/api/pedidos/${secondOrder.code}/sendemail`)
+                .expect(204);
+            
+            result.body.should.be.a('string').that.contains('<div>Nº 0002</div>');
+        })
     })
 
 
