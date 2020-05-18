@@ -4,8 +4,11 @@ import * as chai from 'chai';
 import { Client } from '../../entity/Client'
 import { Product } from '../../entity/Product';
 import { Order } from '../../entity/Order';
+import { OrderService } from '../../logic/OrderService';
 const should = chai.should();
 const expect = chai.expect;
+import * as moment from "moment";
+import { OrderItem } from '../../entity/OrderItem';
 
 describe('Testes de Pedido',function(){
 
@@ -68,7 +71,45 @@ describe('Testes de Pedido',function(){
         order.itens[1].should.have.property('amount').that.equals(3);
     })
 
-    it('Deve formatar um corpo de email à partir de um pedido',async function(){
+    it('Deve formatar um numero de cpf',async function(){
+        let cpf = OrderService.formatCpf('00337611084');
+        cpf.should.equal('003.376.110-84');
+    })
+
+    it('Deve calcular o total de um item de pedido',async function(){
+        let total = OrderService.calculateItemTotal(new OrderItem(<any>{
+            amount:3,
+            product:{
+                code:1,
+                price:75
+            }
+        }));
+        total.should.equal(225);
+
+        total = OrderService.calculateItemTotal(new OrderItem(<any>{
+            amount:2,
+            product:{
+                code:1,
+                price:20
+            }
+        }));
+        total.should.equal(40);
+
+        total = OrderService.calculateItemTotal(new OrderItem(<any>{
+            amount:2,
+            product:{
+                code:1,
+            }
+        }));
+        total.should.equal(0);
+
+        total = OrderService.calculateItemTotal(new OrderItem(<any>{
+            amount:2
+        }));
+        total.should.equal(0);
+    })
+
+    it('Deve calcular o total de um pedido',async function(){
         let order:Order = new Order({
             code:1,
             clientCode:12,
@@ -78,7 +119,7 @@ describe('Testes de Pedido',function(){
                 cpf:'10994028679',
                 email:'will@teste.com'
             },
-            date:new Date(),
+            date:moment('2020-05-18T19:00:00').toDate(),
             observation:'teste',
             payment:'CARD',
             itens:<any>[
@@ -107,14 +148,76 @@ describe('Testes de Pedido',function(){
             ]
         });
 
-        let mailBody = order.formatEmailBody();
+        let total = OrderService.calculateTotal(order);
+        total.should.equal(1100);
+    })
+
+    it('Deve formatar um numero de pedido com 4 digitos',async function(){
+        let number;
+        
+        number = OrderService.formatOrderNumber(1);
+        number.should.equal('0001');
+
+        number = OrderService.formatOrderNumber(12);
+        number.should.equal('0012');
+
+        number = OrderService.formatOrderNumber(112);
+        number.should.equal('0112');
+
+        number = OrderService.formatOrderNumber(1112);
+        number.should.equal('1112');
+
+        number = OrderService.formatOrderNumber(11112);
+        number.should.equal('11112');
+    })
+
+    it('Deve formatar um corpo de email à partir de um pedido',async function(){
+        let order:Order = new Order({
+            code:1,
+            clientCode:12,
+            client:<any>{
+                code:12,
+                name:'william azevedo',
+                cpf:'10994028679',
+                email:'will@teste.com'
+            },
+            date:moment('2020-05-18T19:00:00').toDate(),
+            observation:'teste',
+            payment:'CARD',
+            itens:<any>[
+                {
+                    amount:1,
+                    productCode:1,
+                    product:{
+                        code:1,
+                        name:'Cortina',
+                        manufacturing:"national",
+                        size:'2.3m x 2.8m',
+                        price:200.00
+                    }
+                },
+                {
+                    amount:3,
+                    productCode:2,
+                    product: {
+                        code:2,
+                        name:'Cadeira Escritório',
+                        manufacturing:"imported",
+                        size:'1m x 58xm x 54cm',
+                        price:300.00
+                    }
+                }
+            ]
+        });
+
+        let mailBody = OrderService.formatEmailBody(order);
 
         mailBody.should.be.a('string').that.equals(`
         <body>        
             <p><b>nº Pedido:</b>  0001</p>
-            <p><b>Data:</b> 10994028679</p>
+            <p><b>Data:</b> 18/05/2020 19:00</p>
             <p><b>Cliente:</b> william azevedo</p>
-            <p><b>CPF:</b> 10994028679</p>
+            <p><b>CPF:</b> 109.940.286-79</p>
             <hr/>
             <h3>Itens:</h3>
             <table>
