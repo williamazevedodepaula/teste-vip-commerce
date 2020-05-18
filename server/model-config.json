@@ -54,8 +54,10 @@
           "*": false,
           "find": true,
           "findById": true,
-          "replaceById": true,
-          "create": true,
+          "replaceById": false,
+          "create": false,
+          "registerOrder":true,
+          "updateOrder":true,
           "deleteById": true
         }
       }
@@ -75,5 +77,16 @@
   "imposto": {
     "dataSource": null,
     "public": false
+  },
+  "novoPedido": {
+    "dataSource": null,
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false
+        }
+      }
+    }
   }
 }

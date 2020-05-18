@@ -15,8 +15,6 @@ module.exports = function(Imposto) {
         let startDate = (moment(`${year}-${month}`).startOf('month')).toDate();
         let endDate   = (moment(`${year}-${month}`).endOf('month')).toDate();
 
-        console.log(`start date: ${startDate}`);
-        console.log(`end date: ${endDate}`);
 
         let client:Client = await ClientModel.findById(clientCode,{
             include:{

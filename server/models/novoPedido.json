@@ -1,0 +1,31 @@
+{
+    "name": "novoPedido",
+    "base": "Model",
+    "idInjection": true,
+    "strict": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "code": {
+            "type": "number",
+            "id": true,
+            "generated": true
+        },
+        "date": {
+            "type": "date"
+        },
+        "clientCode": {
+            "type": "number",
+            "required":true,
+            "description":"The client's code"
+        },
+        "itens":{
+            "type":["itemPedido"]
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}

@@ -13,11 +13,13 @@ const OrderItemModel = app.models.ItemPedido;
 
 describe('Testes de Integração de Produtos',function(){
 
+    let productList:Product[];
     let firstProduct:Product;
     let secondProduct:Product;
     
     before('Configura o banco de dados para testes',async function(){
         let testDb:TestDatabaseResult = await SetupTestDatabase(app);
+        productList = testDb.products;
         firstProduct = testDb.products[0];
         secondProduct = testDb.products[1];
     })
@@ -40,7 +42,7 @@ describe('Testes de Integração de Produtos',function(){
 
         it('Deve consultar produtos pela API',async function(){
             let result = await supertest(app).get(`/api/produtos/`).expect(200);
-            result.should.be.an('object').with.property('body').that.is.an('array').with.length(2);
+            result.should.be.an('object').with.property('body').that.is.an('array').with.length(productList.length);
             let products:Product[] = result.body;
 
             products[0].should.have.property('code').that.equals(firstProduct.code);
@@ -65,10 +67,10 @@ describe('Testes de Integração de Produtos',function(){
             result.should.be.an('object').with.property('body').that.is.an('object');
             let product:Product = result.body;
             
-            product.should.be.an('object').with.property('code').that.equals(3,'Deve ter sido gerado um codigo auto-incrementado para o produto');
+            product.should.be.an('object').with.property('code').that.equals(productList.length+1,'Deve ter sido gerado um codigo auto-incrementado para o produto');
             
-            let check:Product = await ProductModel.findById(3);
-            check.should.be.an('object').that.have.property('code').that.equals(3,'O produto deve ter sido cadastrado no banco');
+            let check:Product = await ProductModel.findById(productList.length+1);
+            check.should.be.an('object').that.have.property('code').that.equals(product.code,'O produto deve ter sido cadastrado no banco');
         })
 
         it('Deve realizar UPDATE em um produto pela API',async function(){
