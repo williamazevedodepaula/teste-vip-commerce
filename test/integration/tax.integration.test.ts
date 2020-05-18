@@ -86,6 +86,18 @@ describe('Testes de Integração de Impostos',function(){
         })
     })
 
+
+    describe('Testes da camada de API',async function(){
+             
+        it('Deve calcular o total de impostos de um cliente em um mes',async function(){
+            let totalJanuary  = await supertest(app).get(`/api/impostos/ano/2020/mes/01/cliente/1`).expect(200);
+            let totalFebruary  = await supertest(app).get(`/api/impostos/ano/2020/mes/02/cliente/1`).expect(200);        
+
+            totalJanuary.body.should.equal(219);
+            totalFebruary.body.should.equal(421.5);
+        })
+    })
+
     async function createOrder(order:Order):Promise<Order>{
         let itens = order.itens;
         order = await OrderModel.create(<Order>{
