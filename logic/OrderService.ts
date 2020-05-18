@@ -36,13 +36,13 @@ export class OrderService{
         },'')||'';
         
         return `
-        <body>        
-            <p><b>nº Pedido:</b>  ${this.formatOrderNumber(order.code)}</p>
+        <body>
+            <p><b>Nº Pedido:</b> ${this.formatOrderNumber(order.code)}</p>
             <p><b>Data:</b> ${moment(order.date).format('DD/MM/YYYY HH:mm')}</p>
             <p><b>Cliente:</b> ${order.client.name}</p>
             <p><b>CPF:</b> ${this.formatCpf(order.client.cpf)}</p>
-            <hr/>
             <h3>Itens:</h3>
+            <hr/>
             <table>
                 <tr>
                     <th>Produto</th>
@@ -53,6 +53,7 @@ export class OrderService{
                     <th>Total</th>
                 </tr>${itens}
             </table>
+            <hr/>
             <h3>Total: R$ ${this.calculateTotal(order).toFixed(2)}</h3>
         </body>
         `;

@@ -19,7 +19,7 @@
   "scope": {
     "include": [
       "itens",
-      "cliente"
+      "client"
     ]
   },
   "properties": {
@@ -34,7 +34,7 @@
   },
   "validations": [],
   "relations": {
-    "cliente": {
+    "client": {
       "type": "belongsTo",
       "model": "cliente",
       "foreignKey": "clientCode",

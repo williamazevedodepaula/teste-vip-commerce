@@ -213,13 +213,13 @@ describe('Testes de Pedido',function(){
         let mailBody = OrderService.formatEmailBody(order);
 
         mailBody.should.be.a('string').that.equals(`
-        <body>        
-            <p><b>nº Pedido:</b>  0001</p>
+        <body>
+            <p><b>Nº Pedido:</b> 0001</p>
             <p><b>Data:</b> 18/05/2020 19:00</p>
             <p><b>Cliente:</b> william azevedo</p>
             <p><b>CPF:</b> 109.940.286-79</p>
-            <hr/>
             <h3>Itens:</h3>
+            <hr/>
             <table>
                 <tr>
                     <th>Produto</th>
@@ -246,6 +246,7 @@ describe('Testes de Pedido',function(){
                     <td>R$ 900.00</td>
                 </tr>
             </table>
+            <hr/>
             <h3>Total: R$ 1100.00</h3>
         </body>
         `)
