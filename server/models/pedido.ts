@@ -81,4 +81,21 @@ module.exports = function(Pedido) {
         },
         http: { verb: 'put', path:'/:id' }
     })
+
+
+    Pedido.sendByMail = function(id:number,cb):any{
+        app.models.Email.send({
+            to: ['williamazevedodepaula@gmail.com',`williamazevedodepaula@hotmail.com`],
+            from: `teste.vip.commerce@gmail.com`,
+            subject: 'my subject',
+            text: 'my text',
+            html: 'my <em>html</em>   foooo bar'
+          }, function(err, mail) {
+            console.log('email sent!');
+            console.log(mail);
+
+            if(err) console.error(err);
+            cb(err);
+          })
+    }
 };

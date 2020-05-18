@@ -20,12 +20,12 @@
     "transports": [
       {
         "type": "SMTP",
-        "host": "${SMTP_SERVER}",
+        "host": "smtp.gmail.com",
         "secure": true,
-        "port": "${SMTP_PORT}",
+        "port": 465,
         "auth": {
-          "user": "${SMTP_USERNAME}",
-          "pass": "${SMTP_PASSWORD}"
+          "user": "${EMAIL_USER}",
+          "pass": "${EMAIL_PASSWORD}"
         }
       }
     ]
