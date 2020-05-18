@@ -29,7 +29,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "orders": {
+      "type": "hasMany",
+      "model": "pedido",
+      "foreignKey": "clientCode"
+    }
+  },
   "acls": [],
   "methods": {}
 }

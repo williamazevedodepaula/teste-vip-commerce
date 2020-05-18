@@ -30,26 +30,29 @@ describe('Testes de Integração de Impostos',function(){
             payment:'CARD',
             itens:[{amount:3,productCode:1}]
         });
+        //Impostos: 45
         await createOrder(<any>{
             clientCode:1,
             date:moment('2020-01-12').toDate(),
             payment:'CASH',
             itens:[{amount:2,productCode:1},{amount:3,productCode:2}]
         });
+        //Impostos: 30, 135
         await createOrder(<any>{
             clientCode:1,
             date:moment('2020-01-31').toDate(),
             payment:'CHECK',
             itens:[{amount:1,productCode:4},{amount:2,productCode:3}]
         });
-        //--------_TOTAL de impostos: 210,9
+        //Impostos: 0, 9
+        //--------_TOTAL de impostos: 219
 
         await createOrder(<any>{
             clientCode:1,
             date:moment('2020-02-01').toDate(),
             payment:'CASH',
             itens:[{amount:1,productCode:2},{amount:2,productCode:4}]
-            //Imposto: 40,  0
+            //Imposto: 45,  0
         });        
         await createOrder(<any>{
             clientCode:1,
@@ -65,7 +68,7 @@ describe('Testes de Integração de Impostos',function(){
             itens:[{amount:1,productCode:1},{amount:1,productCode:2},{amount:1,productCode:3},{amount:1,productCode:4}]
             //Imposto: 15, 45, 4.5,  0
         });
-        //--------_TOTAL de impostos: 416,5
+        //--------_TOTAL de impostos: 421,5
     })
 
     describe('Testes da camada de Moelo/Serviço',async function(){
@@ -75,19 +78,20 @@ describe('Testes de Integração de Impostos',function(){
         })
 
         it('Deve calcular o total de impostos de um cliente em um mes',async function(){
-            let totalJanuary  = await TaxModel.getTotalTax('2020','01');
-            let totalFebruary = await TaxModel.getTotalTax('2020','02');
+            let totalJanuary  = await TaxModel.getTotalTax(1,'2020','01');
+            let totalFebruary = await TaxModel.getTotalTax(1,'2020','02');
 
-            totalJanuary.should.equal(210,9);
-            totalFebruary.should.equal(416,5);
+            totalJanuary.should.equal(219);
+            totalFebruary.should.equal(421.5);
         })
     })
 
     async function createOrder(order:Order):Promise<Order>{
         let itens = order.itens;
         order = await OrderModel.create(<Order>{
-            clientCode:2,
-            date:moment().subtract(2,'days').toDate()
+            ...order,
+            code:undefined,
+            itens:undefined
         });
         await OrderItemModel.create(itens.map(item=>({...item,orderCode:order.code})));
         return order;

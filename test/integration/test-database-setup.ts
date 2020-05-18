@@ -107,6 +107,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
             clientCode:1,
             date:moment().subtract(3,'days').toDate()
         });
+        firstOrder = (<any>firstOrder).toJSON();
         firstOrder.itens = await OrderItemModel.create(<OrderItem[]>[
             {
                 amount:3,
@@ -126,6 +127,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
             clientCode:2,
             date:moment().subtract(2,'days').toDate()
         });        
+        secondOrder = (<any>secondOrder).toJSON();
         secondOrder.itens = await OrderItemModel.create(<OrderItem[]>[
             {
                 amount:2,
@@ -145,6 +147,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
             clientCode:1,
             date:moment().subtract(1,'days').toDate()
         });
+        thirdOrder = (<any>thirdOrder).toJSON();
         thirdOrder.itens = await OrderItemModel.create(<OrderItem[]>[
             {
                 amount:2,
@@ -164,6 +167,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
             clientCode:2,
             date:moment().toDate()
         });
+        fourthOrder = (<any>fourthOrder).toJSON();
         fourthOrder.itens = await OrderItemModel.create(<OrderItem[]>[
             {
                 amount:2,

@@ -34,7 +34,7 @@
       "foreignKey": "clientCode",
       "primaryKey": "code"
     },
-    "orderItens": {
+    "itens": {
       "type": "hasMany",
       "model": "itemPedido",
       "foreignKey": "orderCode",
