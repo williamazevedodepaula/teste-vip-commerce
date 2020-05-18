@@ -1,6 +1,6 @@
 
 import { Client } from "entity/Client";
-import { TaxService } from "../../service/TaxService";
+import { TaxService } from "../../logic/TaxService";
 import { Order } from "entity/Order";
 import * as moment from 'moment';
 
