@@ -37,26 +37,47 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
     }
 
     async function SetupProducts():Promise<Product[]>{
-        let firstProduct:Product;
-        let secondProduct:Product;
+        let product:Product;
+        let result:Product[] = [];
 
-        firstProduct = await ProductModel.create(<Partial<Product>>{
+        product = await ProductModel.create(<Partial<Product>>{
             name:'Cortina preta nacional',
             manufacturing:'national',
             size:'2.8m x 2.3m',
-            price:150.00            
+            price:150.00
         });
-        firstProduct.should.have.property('code').that.equals(1);
+        product.should.have.property('code').that.equals(1);
+        result.push(product);
     
-        secondProduct = await ProductModel.create(<Partial<Product>>{
-            name:'Cortina preta nacional',
+        product = await ProductModel.create(<Partial<Product>>{
+            name:'Cortina preta importada',
             manufacturing:'imported',
             size:'2.8m x 2.3m',
             price:300.00            
         });
-        secondProduct.should.have.property('code').that.equals(2);
+        product.should.have.property('code').that.equals(2);
+        result.push(product);
 
-        return [firstProduct,secondProduct];
+
+        product = await ProductModel.create(<Partial<Product>>{
+            name:'porta lápis importado',
+            manufacturing:'imported',
+            size:'10cm x 10cm x 10cm',
+            price:30
+        });
+        product.should.have.property('code').that.equals(3);
+        result.push(product);
+
+        product = await ProductModel.create(<Partial<Product>>{
+            name:'porta lápis nacional',
+            manufacturing:'national',
+            size:'10cm x 10cm x 10cm',
+            price:20
+        });
+        product.should.have.property('code').that.equals(4);
+        result.push(product);
+
+        return result;
     }
     async function SetupClients():Promise<Client[]>{
         let firstClient:Client;
