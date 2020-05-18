@@ -31,7 +31,7 @@ module.exports = function(Pedido) {
         ],
         returns: {
             arg: 'data',
-            type: 'Order',
+            type: 'pedido',
             root: true
         },
         http: { verb: 'post', path:'/' }
@@ -76,18 +76,9 @@ module.exports = function(Pedido) {
         ],
         returns: {
             arg: 'data',
-            type: 'Order',
+            type: 'pedido',
             root: true
         },
         http: { verb: 'put', path:'/:id' }
     })
-
-
-    /*Pedido.afterRemote('replaceById',async function(ctx,instance:Order){        
-        for(var item of (instance.itens||[])){
-            item.orderCode = instance.code;
-            await app.models.ItemPedido.destroyAll({orderCode:instance.code});
-            await app.models.ItemPedido.create(item);
-        }
-    })*/
 };
