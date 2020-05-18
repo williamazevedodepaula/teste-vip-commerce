@@ -58,7 +58,8 @@
           "create": false,
           "registerOrder": true,
           "updateOrder": true,
-          "deleteById": true
+          "deleteById": true,
+          "sendByMail":true
         }
       }
     }

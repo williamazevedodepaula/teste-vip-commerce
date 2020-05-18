@@ -117,5 +117,25 @@ module.exports = function(Pedido) {
                 resolve();
               })
         })
+
+        return mailBody;
     }
+    Pedido.remoteMethod('sendByMail',{
+        description:'Sends the detailed order data by email to the Client',
+        accepts:[
+            {
+                arg:'id',
+                description:'The order number',
+                type:'number',
+                required:true
+            }
+        ],
+        returns: {
+            arg: 'data',
+            type: 'string',
+            root: true
+        },
+        http: { verb: 'post', path:'/:id/sendmail' }
+    })
+
 };

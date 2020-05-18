@@ -38,11 +38,13 @@ describe('Testes de Integração de Pedidos',function(){
             app.models.Pedido.should.have.property('sendByMail');
 
             if(process.env.EMAIL_FOR_RECEIVING_TEST){
+                //Altera o email do cliente para o email cadastrado no docker-compose, para facilitar os testes e conferencia
                 let persistent = await ClientModel.findById(secondOrder.code);
                 await persistent.updateAttribute('email',process.env.EMAIL_FOR_RECEIVING_TEST);
             }
 
-            await app.models.Pedido.sendByMail(secondOrder.code);
+            let mailBody = await app.models.Pedido.sendByMail(secondOrder.code);
+            mailBody.should.be.a('string').that.contains('<p><b>Nº Pedido:</b> 0002</p>');
         })
     })
 
@@ -155,12 +157,18 @@ describe('Testes de Integração de Pedidos',function(){
             itens.should.be.an('array').with.length(0,'Os itens do pedido devem ter sido excluidos tambem');
         })
 
-        it('Deve enviar um pedido por EMAIL através da API',async function(){
+        it('Deve enviar um pedido por EMAIL através da API',async function(){            
+            if(process.env.EMAIL_FOR_RECEIVING_TEST){
+                //Altera o email do cliente para o email cadastrado no docker-compose, para facilitar os testes e conferencia
+                let persistent = await ClientModel.findById(secondOrder.code);
+                await persistent.updateAttribute('email',process.env.EMAIL_FOR_RECEIVING_TEST);
+            }
+
             let result = await supertest(app)
-                .post(`/api/pedidos/${secondOrder.code}/sendemail`)
-                .expect(204);
+                .post(`/api/pedidos/${secondOrder.code}/sendmail`)
+                .expect(200);
             
-            result.body.should.be.a('string').that.contains('<div>Nº 0002</div>');
+            result.body.should.be.a('string').that.contains('<p><b>Nº Pedido:</b> 0002</p>');
         })
     })
 

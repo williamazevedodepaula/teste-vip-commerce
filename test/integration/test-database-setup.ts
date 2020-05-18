@@ -14,6 +14,10 @@ export interface TestDatabaseResult{
 }
 
 export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{    
+    if(process.env.NODE_ENV != 'test'){
+        throw Error("Testes de integração devem ser executados apenas em ambiente de TESTE, para evitar limpeza indesejada do banco de dados");
+    }
+    
     const ProductModel = app.models.Produto;
     const ClientModel = app.models.Cliente;
     const OrderModel = app.models.Pedido;
