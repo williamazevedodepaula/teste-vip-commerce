@@ -16,3 +16,4 @@ services:
       - DB_USERNAME=root
       - EMAIL_USER=teste.vip.commerce@gmail.com
       - EMAIL_PASSWORD=1q2w3e4r@
+      - EMAIL_FOR_RECEIVING_TEST=meu.email@exemplo.com

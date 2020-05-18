@@ -85,7 +85,7 @@ module.exports = function(Pedido) {
 
 
     Pedido.sendByMail = async function(id:number):Promise<any>{
-        let order = await app.models.Pedido.findById(id,{
+        let order:Order = await app.models.Pedido.findById(id,{
             include:[{
                 relation:'itens',
                 scope:{
@@ -100,21 +100,19 @@ module.exports = function(Pedido) {
             (<any>e).status = 404;
             throw e;
         }
-        order = order.toJSON();
+        order = (<any>order).toJSON();
 
         let mailBody = OrderService.formatEmailBody(order);
 
         await new Promise((resolve,reject)=>{
             app.models.Email.send({
-                to: ['williamazevedodepaula@gmail.com',`williamazevedodepaula@hotmail.com`],
+                to: [order.client?.email],
                 from: `teste.vip.commerce@gmail.com`,
                 subject: `Pedido Nº ${OrderService.formatOrderNumber(id)}`,
                 text: 'Seguem os detalhes de seu pedido',
                 html: mailBody
               }, function(err, mail) {
-                console.log('email sent!');
-                console.log(mail);
-    
+
                 if(err) reject(err);
                 resolve();
               })

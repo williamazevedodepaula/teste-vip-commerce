@@ -12,6 +12,7 @@ const assert = chai.assert;
 const app = require('../../server/server');
 const OrderModel = app.models.Pedido;
 const OrderItemModel = app.models.ItemPedido;
+const ClientModel = app.models.Cliente;
 
 describe('Testes de Integração de Pedidos',function(){
 
@@ -29,6 +30,12 @@ describe('Testes de Integração de Pedidos',function(){
     describe('Testes da camada de Repositorio',async function(){
         it('Deve enviar email com dados do pedido',async function(){
             app.models.Pedido.should.have.property('sendByMail');
+
+            if(process.env.EMAIL_FOR_RECEIVING_TEST){
+                let persistent = await ClientModel.findById(secondOrder.code);
+                await persistent.updateAttribute('email',process.env.EMAIL_FOR_RECEIVING_TEST);
+            }
+
             await app.models.Pedido.sendByMail(secondOrder.code);
         })
     })
