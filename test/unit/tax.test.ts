@@ -1,5 +1,5 @@
 import { Product } from "../../entity/Product"
-import { TaxService } from "../../logic/TaxService"
+import { TaxService } from "../../service/TaxService"
 import { Order } from "../../entity/Order"
 import { Client } from "../../entity/Client"
 

@@ -1,7 +1,7 @@
 'use strict';
 
 import { Order } from "entity/Order";
-import { OrderService } from "../../logic/OrderService";
+import { OrderService } from "../../service/OrderService";
 
 const app = require('../../server/server');
 

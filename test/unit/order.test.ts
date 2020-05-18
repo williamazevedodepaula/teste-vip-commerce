@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import { Client } from '../../entity/Client'
 import { Product } from '../../entity/Product';
 import { Order } from '../../entity/Order';
-import { OrderService } from '../../logic/OrderService';
+import { OrderService } from '../../service/OrderService';
 const should = chai.should();
 const expect = chai.expect;
 import * as moment from "moment";
