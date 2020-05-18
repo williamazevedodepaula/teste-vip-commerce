@@ -23,6 +23,11 @@
       "onDelete": "cascade"
     }
   },
+  "scope": {
+    "include": [
+      "product"
+    ]
+  },
   "properties": {
     "code": {
       "type": "number",
@@ -53,8 +58,5 @@
     }
   },
   "acls": [],
-  "methods": {},
-  "scope": {
-    "include":["product"]
-  }
+  "methods": {}
 }

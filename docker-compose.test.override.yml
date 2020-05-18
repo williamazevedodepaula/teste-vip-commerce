@@ -1,5 +1,11 @@
 version: '3'
 services:
+  mail:
+    environment: 
+      - RELAY_HOST=vip-commerce.teste.com
+      - RELAY_PORT=587
+      - RELAY_USERNAME=teste-vip-commerce@example.com
+      - RELAY_PASSWORD=secretpassword
   database:    
     volumes:
       - './docker/volumes/vipComemrce/test/testeWilliam/var/lib/mysql:/var/lib/mysql'
@@ -7,5 +13,14 @@ services:
       - MYSQL_ROOT_PASSWORD=1q2w3e4r
       - MYSQL_DATABASE=vipdb
   api:
+    volumes:
+      - './:/api'
     environment:
       - NODE_ENV=test
+      - DB_PASSWORD=1q2w3e4r
+      - DB_NAME=vipdb
+      - DB_USERNAME=root
+      - SMTP_USERNAME=teste-vip-commerce@example.com
+      - SMTP_PASSWORD=secretpassword
+      - SMTP_SERVER=vip-commerce.teste.com
+      - SMTP_PORT=587

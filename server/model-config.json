@@ -56,8 +56,8 @@
           "findById": true,
           "replaceById": false,
           "create": false,
-          "registerOrder":true,
-          "updateOrder":true,
+          "registerOrder": true,
+          "updateOrder": true,
           "deleteById": true
         }
       }
@@ -77,11 +77,11 @@
   "relatorio": {
     "dataSource": null,
     "public": true,
-    "options":{
-      "remoting":{
-        "sharedMethods":{
-          "*":false,
-          "getTotalTax":true
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "getTotalTax": true
         }
       }
     }
@@ -96,5 +96,9 @@
         }
       }
     }
+  },
+  "email": {
+    "dataSource": "mail",
+    "public": false
   }
 }

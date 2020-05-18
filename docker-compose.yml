@@ -1,22 +1,20 @@
 version: '3'
 services:
+  mail:
+    image: bytemark/smtp
+    restart: always
+    environment:
+      RELAY_PORT: 587      
   database:
     image: 'mysql:5'
     container_name: database
     ports:
       - '3306:3306'
-    volumes:
-      - './docker/volumes/vipComemrce/dev/testeWilliam/var/lib/mysql:/var/lib/mysql'
-    environment:
-      - MYSQL_ROOT_PASSWORD=1q2w3e4r
-      - MYSQL_DATABASE=vipdb
   api:
     container_name: api
     build: ./
     ports:
-      - '3000:3000'
-    volumes:
-      - './:/api'
+      - '3000:3000'    
     depends_on:
       - database
     command: 'wait-for-it database:3306 -- npm start --prefix /api'

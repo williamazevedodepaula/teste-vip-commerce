@@ -28,7 +28,8 @@ describe('Testes de Integração de Pedidos',function(){
 
     describe('Testes da camada de Repositorio',async function(){
         it('Deve enviar email com dados do pedido',async function(){
-            throw new Error("Not yet implemented");
+            app.models.Pedido.should.have.property('sendByMail');
+            await app.models.Pedido.sendByMail(secondOrder.code);
         })
     })
 
