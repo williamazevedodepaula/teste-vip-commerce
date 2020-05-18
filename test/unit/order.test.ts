@@ -10,7 +10,7 @@ const expect = chai.expect;
 import * as moment from "moment";
 import { OrderItem } from '../../entity/OrderItem';
 
-describe('Testes de Pedido',function(){
+describe('Testes Unitários de Pedido',function(){
 
     it('Deve criar um Pedido',async function(){
         let order:Order = new Order();

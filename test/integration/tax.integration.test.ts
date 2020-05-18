@@ -16,6 +16,12 @@ const OrderItemModel = app.models.ItemPedido;
 const ReportModel = app.models.relatorio;
 
 describe('Testes de Integração de Impostos',function(){
+    before('Verifica se está no ambiente de teste, para evitar limpar o banco',function(){
+        if(process.env.NODE_ENV != 'test'){
+            throw Error("Testes de integração devem ser executados apenas em ambiente de TESTE, para evitar limpeza indesejada do banco de dados");
+        }
+    })
+
     before('Configura o banco de dados para testes',async function(){
         let testDb:TestDatabaseResult = await SetupTestDatabase(app);
     })

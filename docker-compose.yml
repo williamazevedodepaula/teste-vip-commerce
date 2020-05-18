@@ -5,6 +5,8 @@ services:
     container_name: database
     ports:
       - '3306:3306'
+    environment: 
+      - MYSQL_DATABASE=vipdb
   api:
     container_name: api
     build: ./

@@ -6,7 +6,7 @@ import { Product } from '../../entity/Product';
 const should = chai.should();
 const expect = chai.expect;
 
-describe('Testes de Produto',function(){
+describe('Testes Unitários de Produto',function(){
 
     it('Deve criar um Produto',async function(){
         let product:Product = new Product(undefined);

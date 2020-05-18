@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": 3306,
     "url": "mysql://root:1q2w3e4r@database/vipdb",
-    "database": "${DB_NAME}",
+    "database": "vipdb",
     "password": "${DB_PASSWORD}",
     "name": "db",
     "user": "${DB_USERNAME}",

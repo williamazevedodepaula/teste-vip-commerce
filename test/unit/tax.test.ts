@@ -3,7 +3,7 @@ import { TaxService } from "../../logic/TaxService"
 import { Order } from "../../entity/Order"
 import { Client } from "../../entity/Client"
 
-describe('Testes sobre Impostos',async function(){
+describe('Testes Unitários sobre Impostos',async function(){
 
     it('Produtos nacional com valor maior que R$100,00 devem ter taxa de imposto de 10%',function(){
         let product1:Partial<Product> = {

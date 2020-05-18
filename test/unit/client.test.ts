@@ -5,7 +5,7 @@ import { Client } from '../../entity/Client'
 const should = chai.should();
 const expect = chai.expect;
 
-describe('Testes de Cliente',function(){
+describe('Testes Unitários de Cliente',function(){
 
     it('Deve criar um cliente',async function(){
         let client:Client = new Client(undefined);
