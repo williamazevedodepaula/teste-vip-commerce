@@ -21,7 +21,7 @@ describe('Testes de Integração de Clientes',function(){
         secondClient = testDb.clients[1];
     })
 
-    describe('Testes da camada de Moelo/Serviço',async function(){
+    describe('Testes da camada de Respositorio',async function(){
         
     })
 

@@ -1,5 +1,5 @@
 import { Product } from "../../entity/Product"
-import { Tax } from "../../entity/Tax"
+import { TaxService } from "../../service/TaxService"
 import { Order } from "../../entity/Order"
 import { Client } from "../../entity/Client"
 
@@ -20,8 +20,8 @@ describe('Testes sobre Impostos',async function(){
             size:'1m x 58xm x 54cm',
             price:100.01
         }
-        let taxAmount1:number = Tax.getProductTax(product1);
-        let taxAmount2:number = Tax.getProductTax(product2);
+        let taxAmount1:number = TaxService.getProductTax(product1);
+        let taxAmount2:number = TaxService.getProductTax(product2);
 
         taxAmount1.should.equal(20.00,'O imposto aplicado deve ser de 10%');
         taxAmount2.should.equal(10.00,'O imposto aplicado deve ser de 10% (com 2 casas decimais)');        
@@ -42,8 +42,8 @@ describe('Testes sobre Impostos',async function(){
             size:'1cm x 1cm',
             price:0.5
         }
-        let taxAmount1:number = Tax.getProductTax(product1);
-        let taxAmount2:number = Tax.getProductTax(product2);
+        let taxAmount1:number = TaxService.getProductTax(product1);
+        let taxAmount2:number = TaxService.getProductTax(product2);
 
         taxAmount1.should.equal(0,'O imposto aplicado deve ser de 0, pois o produto em questão é isento');
         taxAmount2.should.equal(0,'O imposto aplicado deve ser de 0, pois o produto em questão é isento'); 
@@ -71,9 +71,9 @@ describe('Testes sobre Impostos',async function(){
             size:'4m x 2.3m',
             price:200           
         }
-        let taxAmount1:number = Tax.getProductTax(product1);
-        let taxAmount2:number = Tax.getProductTax(product2);
-        let taxAmount3:number = Tax.getProductTax(product3);
+        let taxAmount1:number = TaxService.getProductTax(product1);
+        let taxAmount2:number = TaxService.getProductTax(product2);
+        let taxAmount3:number = TaxService.getProductTax(product3);
 
         taxAmount1.should.equal(15,'O imposto sobre produtos importados é de 15%');
         taxAmount2.should.equal(0.07,'O imposto sobre produtos importados é de 15% (com 2 casas decimais)');
@@ -136,7 +136,7 @@ describe('Testes sobre Impostos',async function(){
             ]
         });
 
-        let taxAmount:number = Tax.getOrderTax(order);
+        let taxAmount:number = TaxService.getOrderTax(order);
         taxAmount.should.equal(178,'O imposto do pedido deve ser o somatorio dos impostos sobre os produtos do pedido');
     })
 
@@ -213,7 +213,7 @@ describe('Testes sobre Impostos',async function(){
             orders:[order1,order2,order3]
         });
 
-        let totalTax:number = Tax.getClientTax(client);
+        let totalTax:number = TaxService.getClientTax(client);
         totalTax.should.equal(94,'O imposto total pago pelo cliente deve ser igual ao somatorio dos impostos em seus pedidos');
     });
 })

@@ -1,6 +1,6 @@
 
 import { Client } from "entity/Client";
-import { Tax } from "../../entity/Tax";
+import { TaxService } from "../../service/TaxService";
 import { Order } from "entity/Order";
 import * as moment from 'moment';
 
@@ -36,7 +36,7 @@ module.exports = function(Relatorio) {
             }
         });
         
-        return Tax.getClientTax((<any>client).toJSON());
+        return TaxService.getClientTax((<any>client).toJSON());
     }
     Relatorio.remoteMethod('getTotalTax',{
         description:'Gets the total amount of taxes paid by a client in an entire month',

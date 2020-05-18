@@ -24,7 +24,7 @@ describe('Testes de Integração de Produtos',function(){
         secondProduct = testDb.products[1];
     })
 
-    describe('Testes da camada de Moelo/Serviço',async function(){
+    describe('Testes da camada de Repositorio',async function(){
         
     })
 

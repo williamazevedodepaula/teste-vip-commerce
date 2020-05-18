@@ -1,8 +1,8 @@
-import { Product } from "./Product";
-import { Order } from "./Order";
-import { Client } from "./Client";
+import { Product } from "../entity/Product";
+import { Order } from "../entity/Order";
+import { Client } from "../entity/Client";
 
-export class Tax{
+export class TaxService{
 
     static getProductTax(product:Partial<Product>):number{           
         let aliquot = (product.manufacturing == 'imported') ? 0.15 : 
@@ -14,13 +14,13 @@ export class Tax{
     static getOrderTax(order:Partial<Order>):number{   
         return order.itens?.reduce(
             (total,item)=>total+(
-                (item.amount||0) * Tax.getProductTax(item.product))
+                (item.amount||0) * TaxService.getProductTax(item.product))
             ,0)||0;
     }
 
     static getClientTax(client:Partial<Client>):number{        
         return client.orders?.reduce(
-            (total,order)=>total+Tax.getOrderTax(order)
+            (total,order)=>total+TaxService.getOrderTax(order)
         ,0)||0;
     }    
 }

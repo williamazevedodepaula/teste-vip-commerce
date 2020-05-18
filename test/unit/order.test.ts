@@ -67,4 +67,53 @@ describe('Testes de Pedido',function(){
         order.itens[1].should.have.property('productCode').that.equals(2);
         order.itens[1].should.have.property('amount').that.equals(3);
     })
+
+    it('Deve formatar um corpo de email à partir de um pedido',async function(){
+        let order:Order = new Order({
+            code:1,
+            clientCode:12,
+            client:<any>{
+                code:12,
+                name:'william azevedo',
+                cpf:'10994028679',
+                email:'will@teste.com'
+            },
+            date:new Date(),
+            observation:'teste',
+            payment:'CARD',
+            itens:<any>[
+                {
+                    amount:1,
+                    productCode:1,
+                    product:{
+                        code:1,
+                        name:'Cortina',
+                        manufacturing:"national",
+                        size:'2.3m x 2.8m'
+                    }
+                },
+                {
+                    amount:3,
+                    productCode:2,
+                    product: {
+                        code:2,
+                        name:'Cadeira Escritório',
+                        manufacturing:"imported",
+                        size:'1m x 58xm x 54cm'
+                    }
+                }
+            ]
+        });
+
+        let mailBody = order.formatEmailBody();
+
+        mailBody.should.be.a('string').that.equals(`
+        <body>        
+            <p>Pedido nº 1</p>
+            <p>Cliente: william azevedo</p>
+            <p>CPF: 10994028679</p>
+            <p>CPF: 10994028679</p>
+        </body>
+        `)
+    })
 })

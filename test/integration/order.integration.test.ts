@@ -26,8 +26,10 @@ describe('Testes de Integração de Pedidos',function(){
         secondOrder = testDb.orders[1];
     })
 
-    describe('Testes da camada de Moelo/Serviço',async function(){
-        
+    describe('Testes da camada de Repositorio',async function(){
+        it('Deve enviar email com dados do pedido',async function(){
+            throw new Error("Not yet implemented");
+        })
     })
 
     describe('Testes de API',async function(){        

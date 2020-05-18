@@ -71,7 +71,7 @@ describe('Testes de Integração de Impostos',function(){
         //--------_TOTAL de impostos: 421,5
     })
 
-    describe('Testes da camada de Moelo/Serviço',async function(){
+    describe('Testes da camada de Repositorio',async function(){
         
         it('Deve existir um Modelo não-persistente para calculo de impostos',async function(){
             expect(ReportModel).not.to.be.undefined;

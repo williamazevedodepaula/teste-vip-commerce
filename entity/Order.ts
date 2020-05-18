@@ -13,4 +13,8 @@ export class Order extends BaseEntity<Order>{
     clientCode:number
 
     itens?:OrderItem[]
+
+    formatEmailBody():string{
+        throw Error("Not yet implemented");
+    }
 }
