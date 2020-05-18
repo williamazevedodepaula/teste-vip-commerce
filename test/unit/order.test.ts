@@ -89,7 +89,8 @@ describe('Testes de Pedido',function(){
                         code:1,
                         name:'Cortina',
                         manufacturing:"national",
-                        size:'2.3m x 2.8m'
+                        size:'2.3m x 2.8m',
+                        price:200.00
                     }
                 },
                 {
@@ -99,7 +100,8 @@ describe('Testes de Pedido',function(){
                         code:2,
                         name:'Cadeira Escritório',
                         manufacturing:"imported",
-                        size:'1m x 58xm x 54cm'
+                        size:'1m x 58xm x 54cm',
+                        price:300.00
                     }
                 }
             ]
@@ -109,10 +111,39 @@ describe('Testes de Pedido',function(){
 
         mailBody.should.be.a('string').that.equals(`
         <body>        
-            <p>Pedido nº 1</p>
-            <p>Cliente: william azevedo</p>
-            <p>CPF: 10994028679</p>
-            <p>CPF: 10994028679</p>
+            <p><b>nº Pedido:</b>  0001</p>
+            <p><b>Data:</b> 10994028679</p>
+            <p><b>Cliente:</b> william azevedo</p>
+            <p><b>CPF:</b> 10994028679</p>
+            <hr/>
+            <h3>Itens:</h3>
+            <table>
+                <tr>
+                    <th>Produto</th>
+                    <th>Fabricação</th>
+                    <th>Tamanho</th>
+                    <th>Vlr. Unitario</th>
+                    <th>Quantidade</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td>Cortina</td>
+                    <td>Nacional</td>
+                    <td>2.3m x 2.8m</td>
+                    <td>R$ 200.00</td>
+                    <td>1</td>
+                    <td>R$ 200.00</td>
+                </tr>
+                <tr>
+                    <td>Cadeira Escritório</td>
+                    <td>Importada</td>
+                    <td>1m x 58xm x 54cm</td>
+                    <td>R$ 300.00</td>
+                    <td>3</td>
+                    <td>R$ 900.00</td>
+                </tr>
+            </table>
+            <h3>Total: R$ 1100.00</h3>
         </body>
         `)
     })
