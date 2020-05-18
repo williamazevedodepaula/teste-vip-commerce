@@ -13,7 +13,7 @@ const app = require('../../server/server');
 const ProductModel = app.models.Produto;
 const OrderModel = app.models.Pedido;
 const OrderItemModel = app.models.ItemPedido;
-const TaxModel = app.models.Imposto;
+const ReportModel = app.models.relatorio;
 
 describe('Testes de Integração de Impostos',function(){
     before('Configura o banco de dados para testes',async function(){
@@ -74,12 +74,12 @@ describe('Testes de Integração de Impostos',function(){
     describe('Testes da camada de Moelo/Serviço',async function(){
         
         it('Deve existir um Modelo não-persistente para calculo de impostos',async function(){
-            expect(TaxModel).not.to.be.undefined;
+            expect(ReportModel).not.to.be.undefined;
         })
 
         it('Deve calcular o total de impostos de um cliente em um mes',async function(){
-            let totalJanuary  = await TaxModel.getTotalTax(1,'2020','01');
-            let totalFebruary = await TaxModel.getTotalTax(1,'2020','02');
+            let totalJanuary  = await ReportModel.getTotalTax(1,'2020','01');
+            let totalFebruary = await ReportModel.getTotalTax(1,'2020','02');
 
             totalJanuary.should.equal(219);
             totalFebruary.should.equal(421.5);
@@ -89,9 +89,9 @@ describe('Testes de Integração de Impostos',function(){
 
     describe('Testes da camada de API',async function(){
              
-        it('Deve calcular o total de impostos de um cliente em um mes',async function(){
-            let totalJanuary  = await supertest(app).get(`/api/impostos/ano/2020/mes/01/cliente/1`).expect(200);
-            let totalFebruary  = await supertest(app).get(`/api/impostos/ano/2020/mes/02/cliente/1`).expect(200);        
+        it('Deve calcular o total de impostos de um cliente em um mes pela API',async function(){
+            let totalJanuary  = await supertest(app).get(`/api/relatorios/impostos/ano/2020/mes/01/cliente/1`).expect(200);
+            let totalFebruary  = await supertest(app).get(`/api/relatorios/impostos/ano/2020/mes/02/cliente/1`).expect(200);        
 
             totalJanuary.body.should.equal(219);
             totalFebruary.body.should.equal(421.5);

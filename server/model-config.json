@@ -74,9 +74,17 @@
       }
     }
   },
-  "imposto": {
+  "relatorio": {
     "dataSource": null,
-    "public": false
+    "public": true,
+    "options":{
+      "remoting":{
+        "sharedMethods":{
+          "*":false,
+          "getTotalTax":true
+        }
+      }
+    }
   },
   "novoPedido": {
     "dataSource": null,
