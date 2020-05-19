@@ -20,6 +20,10 @@
       "required": true,
       "description": "The client's code"
     },
+    "payment":{
+      "type":"string",
+      "required":true
+    },
     "itens": {
       "type": [
         "itemPedido"

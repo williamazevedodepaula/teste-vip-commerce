@@ -109,6 +109,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
     async function SetupOrders():Promise<Order[]>{
         let firstOrder:Order = await OrderModel.create(<Order>{
             clientCode:1,
+            payment:'CASH',
             date:moment().subtract(3,'days').toDate()
         });
         firstOrder = (<any>firstOrder).toJSON();
@@ -129,6 +130,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
         
         let secondOrder:Order = await OrderModel.create(<Order>{
             clientCode:2,
+            payment:'CHECK',
             date:moment().subtract(2,'days').toDate()
         });        
         secondOrder = (<any>secondOrder).toJSON();
@@ -148,6 +150,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
         //-----------------------------------------------------------
 
         let thirdOrder:Order = await OrderModel.create(<Order>{
+            payment:'CARD',
             clientCode:1,
             date:moment().subtract(1,'days').toDate()
         });
@@ -168,6 +171,7 @@ export async function SetupTestDatabase(app:any):Promise<TestDatabaseResult>{
         //-----------------------------------------------------------
 
         let fourthOrder:Order = await OrderModel.create(<Order>{
+            payment:'CASH',
             clientCode:2,
             date:moment().toDate()
         });

@@ -29,7 +29,12 @@
       "generated": true
     },
     "date": {
-      "type": "date"
+      "type": "date",
+      "default":"$now"
+    },
+    "payment":{
+      "type":"string",
+      "required":true
     }
   },
   "validations": [],

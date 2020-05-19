@@ -12,6 +12,15 @@ module.exports = function(Pedido) {
 
 
     /**
+     * Validação do campo 'manufacturing'. Impede que valores invalidos sejam informados pela API
+     */
+    Pedido.validate("payment",function(err) {
+        if (!['CASH','CHECK','CARD'].includes((<Order>this).payment)){
+            err();
+        }
+    },{message:'invalid payment value. Accepted values: "CASH", "CHECK" and "CARD" ' }); 
+
+    /**
      * @name Pedido.registerOrder
      * @method
      * @mehtodOf app.models.Pedido
@@ -31,7 +40,7 @@ module.exports = function(Pedido) {
             item = await app.models.ItemPedido.create(item)
             persistedItens.push(item);
         }
-        return <any>{...order,itens:persistedItens};
+        return <any>{...(<any>order).toJSON(),itens:persistedItens};
     }
     Pedido.remoteMethod('registerOrder',{
         description:'Creates an order and its itens in the datasource',

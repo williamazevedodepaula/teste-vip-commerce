@@ -82,6 +82,7 @@ describe('Testes de Integração de Pedidos',function(){
                 .post(`/api/pedidos`)
                 .send(<Partial<Order>>{
                     clientCode:1,
+                    payment:'CASH',
                     itens:[
                         {
                             amount:10,
