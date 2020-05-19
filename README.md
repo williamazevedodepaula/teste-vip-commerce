@@ -38,7 +38,7 @@ Para executar a aplicação em ambiente de **DESENVOLVIMENTO**, na raiz do proje
 Para parar a aplicação:
 
 ```
-  docker-compose -f docker-compose.yml -f docker-compose.development.override.yml down
+  docker-compose down
 ```
 
 **IMPORTANTE**: Para executar a aplicação em outro ambiente, primeiro parar a aplicação e depois reexecutar no ambiente desejado
