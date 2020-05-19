@@ -43,7 +43,27 @@ Para parar a aplicação:
 
 **IMPORTANTE**: Para executar a aplicação em outro ambiente, primeiro parar a aplicação e depois reexecutar no ambiente desejado
 
+3. Para consultar os logs:
 
+Log do banco da API:
+
+```
+  docker-compose logs -f api
+```
+
+Log do banco de dados:
+
+```
+  docker-compose logs -f database
+```
+
+4. Após inicializada (a primeira vez demora um pouco, devido ao **build** das imagens e instalação das dependências), a api estará disponível em:
+
+http://localhost:3000/api
+
+e a **DOCUMENTAÇÂO** completa da API, utilizando a interface *swagger*, bem como interface gráfica para interação com a API estarão disponíveis em:
+
+http://localhost:3000/explorer/
 
 ## Testes Automatizados
 
