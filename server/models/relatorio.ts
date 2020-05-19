@@ -6,8 +6,24 @@ import * as moment from 'moment';
 
 const app = require('../../server/server');
 
+/**
+ * Extende o modelo Relatorio do loopback, acrescentando novos métodos
+ */
 module.exports = function(Relatorio) {
 
+    /**
+     * @name Pedido.getTotalTax
+     * @method
+     * @mehtodOf app.models.Relatorio
+     * @description 
+     * 
+     * Retorna o total de impostos pagos pelo cliente em um mês
+     * 
+     * @param clientCode código do cliente
+     * @param year o ano para cálculo dos impostos
+     * @param month o mês para cálculo dos impostos
+     * @return {Promise} promise que resolve com os dados inseridos
+     */
     Relatorio.getTotalTax = async function(clientCode:number, year:number, month:number):Promise<number>{
         const ClientModel = app.models.Cliente;
         const OrderModel = app.models.Pedido;

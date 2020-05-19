@@ -5,9 +5,23 @@ import { OrderService } from "../../service/OrderService";
 
 const app = require('../../server/server');
 
+/**
+ * Extende o modelo Pedido do loopback, acrescentando novos métodos
+ */
 module.exports = function(Pedido) {
 
 
+    /**
+     * @name Pedido.registerOrder
+     * @method
+     * @mehtodOf app.models.Pedido
+     * @description 
+     * 
+     * Realiza o registro de um pedido e seus itens no banco de dados.
+     * 
+     * @param order instância do pedido a ser salvo
+     * @return {Promise} promise que resolve com os dados inseridos
+     */
     Pedido.registerOrder = async function(order:Order):Promise<Order>{
         let itens = order.itens||[];
         let persistedItens = [];
@@ -39,7 +53,19 @@ module.exports = function(Pedido) {
     })
 
 
-
+    /**
+     * @name Pedido.updateOrder
+     * @method
+     * @mehtodOf app.models.Pedido
+     * @description 
+     * 
+     * Atualiza os dados de um pedido. Se informados itens de pedido, os itens antigos
+     * são removidos do banco de dados e novos itens são incluídos.
+     *
+     * @param id Código do pedido a ser modificado
+     * @param dataToUpdate dados a serem sobrescritos. Não pode conter o code.
+     * @return {Promise} promise que resolve com os dados inseridos
+     */
     Pedido.updateOrder = async function(id:number,dataToUpdate:Order):Promise<Order>{
         let order:Order = await Pedido.findById(id);
 
@@ -84,6 +110,17 @@ module.exports = function(Pedido) {
     })
 
 
+    /**
+     * @name Pedido.sendByMail
+     * @method
+     * @mehtodOf app.models.Pedido
+     * @description 
+     * 
+     * Envia os dados do pedido por email
+     * 
+     * @param id: código do pedido a ser enviado por email
+     * @return {Promise} promise que resolve com o corpo do email enviado, caso o envio ocorra com sucesso
+     */
     Pedido.sendByMail = async function(id:number):Promise<any>{
         let order:Order = await app.models.Pedido.findById(id,{
             include:[{
