@@ -64,3 +64,20 @@ Para executar todos os testes (dentro do container):
 ```
 docker exec -it api npm test
 ```
+
+### Recebimento de emails
+
+Alguns testes de integração envolvem o envio de email para Cliente, com os dados do pedido. Para que você possa receber esses emails em sua caixa de entrada, é necessário alterar uma variável de ambiente no **docker-compose.test.override.yml**. Abra o arquivo e localize a seguinte variável de ambiente na secção **environment**, e altere para o email de sua preferência:
+
+```
+EMAIL_FOR_RECEIVING_TEST=meu.email@exemplo.com
+```
+
+Em seguida, reinicie a api e execute os testes novamente:
+
+```
+docker-compose -f docker-compose.yml -f docker-compose.development.override.yml restart api
+docker exec -it api npm test
+```
+
+Ao fazer isso, o email do Cliente no banco de dados de teste será cadastrado com o email fornecido para a variável de ambiente, e você receberá o email enviado durante o teste em sua caixa de entrada.
