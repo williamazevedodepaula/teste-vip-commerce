@@ -15,7 +15,7 @@ const OrderModel = app.models.Pedido;
 const OrderItemModel = app.models.ItemPedido;
 const ReportModel = app.models.relatorio;
 
-describe('Testes de Integração de Impostos',function(){
+describe('Testes de Integração de Relatórios',function(){
     before('Verifica se está no ambiente de teste, para evitar limpar o banco',function(){
         if(process.env.NODE_ENV != 'test'){
             throw Error("Testes de integração devem ser executados apenas em ambiente de TESTE, para evitar limpeza indesejada do banco de dados");
@@ -79,7 +79,7 @@ describe('Testes de Integração de Impostos',function(){
 
     describe('Testes da camada de Repositorio',async function(){
         
-        it('Deve existir um Modelo não-persistente para calculo de impostos',async function(){
+        it('Deve existir um Modelo não-persistente para relatórios',async function(){
             expect(ReportModel).not.to.be.undefined;
         })
 
