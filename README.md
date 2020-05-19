@@ -56,7 +56,7 @@ Os Testes de integração, por sua vez, dependem do Framework e do banco de dado
 Para executar o teste de integração, dentro do container:
 
 ```
-docker exec -it api npm run integration test
+docker exec -it api npm run integration-test
 ```
 
 Para executar todos os testes (dentro do container):
