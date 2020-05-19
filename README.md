@@ -99,7 +99,7 @@ EMAIL_FOR_RECEIVING_TEST=meu.email@exemplo.com
 Em seguida, reinicie a api e execute os testes novamente:
 
 ```
-docker-compose -f docker-compose.yml -f docker-compose.development.override.yml restart api
+docker-compose -f docker-compose.yml -f docker-compose.test.override.yml restart api
 docker exec -it api npm test
 ```
 
