@@ -22,11 +22,9 @@ os: linux
 # If you are not copying any files to the Amazon EC2 instance, then remove the
 #   "files" section altogether. A blank or incomplete "files" section
 #   may cause associated deployments to fail.
-#files:
-#  - source: 
-#    destination:
-#  - source:
-#    destination:
+files:
+  - source: source
+    destination: /webapps/myApp
 # For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
 #   you can specify a "permissions" 
 #   section here that describes special permissions to apply to the files 
@@ -99,15 +97,14 @@ hooks:
 #   in the script specified in "location".
   AfterInstall:
     - location: afterinstall.sh
-      timeout: 10
-#      runas: 
-    - location: start.sh
+#      timeout: 10
+#      runas:     
 #      timeout:10
 #      runas:
 # During the ApplicationStart deployment lifecycle event, run the commands 
 #   in the script specified in "location".
-#  ApplicationStart:
-#    - location: start.sh
+  ApplicationStart:
+    - location: start.sh
 #      timeout: 10
 #      runas:
 #    - location: 
