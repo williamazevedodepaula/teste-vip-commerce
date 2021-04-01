@@ -101,14 +101,14 @@ hooks:
     - location: afterinstall.sh
       timeout: 10
 #      runas: 
-#    - location: 
-#      timeout:
+    - location: start.sh
+      timeout:10
 #      runas:
 # During the ApplicationStart deployment lifecycle event, run the commands 
 #   in the script specified in "location".
-  ApplicationStart:
-    - location: start.sh
-      timeout: 10
+#  ApplicationStart:
+#    - location: start.sh
+#      timeout: 10
 #      runas:
 #    - location: 
 #      timeout:
